@@ -1,0 +1,9 @@
+[extensions]
+hgext.graphlog =
+hgext.bookmarks =
+hgext.fetch=
+rebase =
+mq =
+[ui]
+username = Niels Hamaker 
+email = hamaker@deds.nl

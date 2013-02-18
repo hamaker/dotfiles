@@ -1,0 +1,16 @@
+[alias]
+	st = status --short
+	co = checkout
+	ci = commit
+	 l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+
+[push]
+	default = upstream
+[user]
+	name = Niels Hamaker
+	email = niels@brightin.nl
+[color]
+	ui = true
+[status]
+	submodule = 1
