@@ -1,9 +1,12 @@
 [alias]
-	st = status --short
-	co = checkout
-	ci = commit
-	 l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+	s 	= status --short
+	co 	= checkout
+	ci 	= commit -av
+	l 	= log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	lol 	= log --pretty=oneline --abbrev-commit --graph --decorate
+	d 	= diff
+	b 	= branch
+	m 	= merge
 
 [push]
 	default = upstream
@@ -14,3 +17,5 @@
 	ui = true
 [status]
 	submodule = 1
+[core]
+	excludesfile = /Users/niels/.gitignore_global
