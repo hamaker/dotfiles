@@ -1,12 +1,21 @@
 [alias]
 	s 	= status --short
 	co 	= checkout
+	f 	= fetch
 	ci 	= commit -av
-	l 	= log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	l 	= log -25 --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
 	lol 	= log --pretty=oneline --abbrev-commit --graph --decorate
+	lg 	= log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	d 	= diff
 	b 	= branch
 	m 	= merge
+	rh1	= reset --hard HEAD~1
+	cot	= checkout testing
+	com	= checkout master
+	rbm	= rebase master
+	changed = show --pretty=\"format:\" --name-only
+  sp  = stash pop
+  pb  = push origin HEAD
 
 [push]
 	default = upstream
@@ -15,7 +24,17 @@
 	email = niels@brightin.nl
 [color]
 	ui = true
+	branch = always
 [status]
 	submodule = 1
 [core]
 	excludesfile = /Users/niels/.gitignore_global
+	editor = /usr/local/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[merge]
+	defaultToUpstream = true

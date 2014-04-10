@@ -1,77 +1,11 @@
+echo $BASH_SOURCE
 PATH="/usr/local/bin:/Users/niels/.rbenv/bin:/usr/local/share/npm/bin/:$PATH"
+PATH="/Library/Developer/AndroidDeveloperTools/sdk/tools:$PATH"
+PATH="/Library/Developer/AndroidDeveloperTools/sdk/platform-tools:$PATH"
+PATH="./bin:$PATH"
 eval "$(rbenv init -)"
 source ~/.rbenv/completions/rbenv.bash
-Color_Off="\[\033[0m\]"       # Text Reset
- 
-# Regular Colors
-Black="\[\033[0;30m\]"        # Black
-Red="\[\033[0;31m\]"          # Red
-Green="\[\033[0;32m\]"        # Green
-Yellow="\[\033[0;33m\]"       # Yellow
-Blue="\[\033[0;34m\]"         # Blue
-Purple="\[\033[0;35m\]"       # Purple
-Cyan="\[\033[0;36m\]"         # Cyan
-White="\[\033[0;37m\]"        # White
- 
-# Bold
-BBlack="\[\033[1;30m\]"       # Black
-BRed="\[\033[1;31m\]"         # Red
-BGreen="\[\033[1;32m\]"       # Green
-BYellow="\[\033[1;33m\]"      # Yellow
-BBlue="\[\033[1;34m\]"        # Blue
-BPurple="\[\033[1;35m\]"      # Purple
-BCyan="\[\033[1;36m\]"        # Cyan
-BWhite="\[\033[1;37m\]"       # White
- 
-# Underline
-UBlack="\[\033[4;30m\]"       # Black
-URed="\[\033[4;31m\]"         # Red
-UGreen="\[\033[4;32m\]"       # Green
-UYellow="\[\033[4;33m\]"      # Yellow
-UBlue="\[\033[4;34m\]"        # Blue
-UPurple="\[\033[4;35m\]"      # Purple
-UCyan="\[\033[4;36m\]"        # Cyan
-UWhite="\[\033[4;37m\]"       # White
- 
-# Background
-On_Black="\[\033[40m\]"       # Black
-On_Red="\[\033[41m\]"         # Red
-On_Green="\[\033[42m\]"       # Green
-On_Yellow="\[\033[43m\]"      # Yellow
-On_Blue="\[\033[44m\]"        # Blue
-On_Purple="\[\033[45m\]"      # Purple
-On_Cyan="\[\033[46m\]"        # Cyan
-On_White="\[\033[47m\]"       # White
- 
-# High Intensty
-IBlack="\[\033[0;90m\]"       # Black
-IRed="\[\033[0;91m\]"         # Red
-IGreen="\[\033[0;92m\]"       # Green
-IYellow="\[\033[0;93m\]"      # Yellow
-IBlue="\[\033[0;94m\]"        # Blue
-IPurple="\[\033[0;95m\]"      # Purple
-ICyan="\[\033[0;96m\]"        # Cyan
-IWhite="\[\033[0;97m\]"       # White
- 
-# Bold High Intensty
-BIBlack="\[\033[1;90m\]"      # Black
-BIRed="\[\033[1;91m\]"        # Red
-BIGreen="\[\033[1;92m\]"      # Green
-BIYellow="\[\033[1;93m\]"     # Yellow
-BIBlue="\[\033[1;94m\]"       # Blue
-BIPurple="\[\033[1;95m\]"     # Purple
-BICyan="\[\033[1;96m\]"       # Cyan
-BIWhite="\[\033[1;97m\]"      # White
- 
-# High Intensty backgrounds
-On_IBlack="\[\033[0;100m\]"   # Black
-On_IRed="\[\033[0;101m\]"     # Red
-On_IGreen="\[\033[0;102m\]"   # Green
-On_IYellow="\[\033[0;103m\]"  # Yellow
-On_IBlue="\[\033[0;104m\]"    # Blue
-On_IPurple="\[\033[10;95m\]"  # Purple
-On_ICyan="\[\033[0;106m\]"    # Cyan
-On_IWhite="\[\033[0;107m\]"   # White
+source ~/dotfiles/bash_colours.bash
  
 # rbenv version | sed -e 's/ .*//'
 
@@ -84,17 +18,40 @@ export SQLPATH="/usr/local/oracle/instantclient_10_2"
 export TNS_ADMIN="/usr/local/oracle/instantclient_10_2" 
 export PATH=$PATH:$DYLD_LIBRARY_PATH
 export NODE_PATH='/usr/local/lib/node'
-export BUNDLER_EDITOR='subl'
+export BUNDLER_EDITOR='vim'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 
 alias r='bundle exec rails'
 alias rc='bundle exec rails c'
 alias be='bundle exec'
+alias spec='bundle exec rspec'
+alias b='bundle'
+alias migrate='bundle exec rake db:migrate && bundle exec rake db:test:prepare'
+
 alias ls='ls -G'
-alias ll='ls -lha'
+alias ll='ls -lhatr'
+alias l='ls -l'
 alias la='ls -a'
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
 alias grep='grep --color=auto'
 alias psa='ps uax'
+alias v='vim .'
+
+alias g='git'
+alias gp='git push'
+alias gcom='git co master'
+alias gcot='git co testing'
+alias pr='powder restart'
+alias ssh-add-brightin='ssh-add ~/.ssh/brightin.id_rsa'
+alias gt='gmerge testing'
+alias gm='gmerge master'
+alias nerd='cd ~/nerd/'
 
 #GIT_PS1_SHOWUPSTREAM="verbose"
 GIT_PS1_SHOWDIRTYSTATE=true
@@ -104,9 +61,17 @@ export PS1="\n$Red[\t] \$(rbenv version-name) \n$Green[\w]$BYellow \n\$( __git_p
 #export PS1="\n\e[0;31m[\t]\e[m \e[0;31m \$(rbenv version-name) \e[m \n\e[0;32m[\w]\e[m \n\e[1;33m\$(__git_ps1)\e[m $ "
 #PS1='\n\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\n\$ '
 
-PROMPT_COMMAND='history -a'
 shopt -s histappend
 export HISTCONTROL=erasedups
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export PROMPT_COMMAND='history -a ; echo -ne "\033]0;`echo ${PWD##*/}`\007"'
+export PGDATA='/usr/local/var/postgres'
+poms () { open http://docs.poms.omroep.nl/media/$1 ;}
+gmerge () {
+  branch=`git describe --contains --all HEAD`
+  git push origin HEAD
+  git checkout $1 && git pull && git merge "$branch" && git push && git checkout "$branch"
+}
+  

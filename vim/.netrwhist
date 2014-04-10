@@ -1,7 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/niels/brightin/bbr-sites/bbr-rotterdam-staging/config'
-let g:netrw_dirhist_2='/Users/niels/brightin/bbr-sites/bbr-rotterdam-staging'
-let g:netrw_dirhist_3='/Users/niels/brightin/bbr-sites/bbr-rotterdam-staging/config/initializers'
-let g:netrw_dirhist_4='/Users/niels/brightin/nudge/config'
-let g:netrw_dirhist_5='/Users/niels/brightin/zapp/.git/modules/vendor/gems/poms'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/niels/brightin/zappelin-huisjes/scripts'
+let g:netrw_dirhist_2='/Users/niels/dotfiles/vim'
