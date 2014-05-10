@@ -3,7 +3,7 @@
 	co 	= checkout
 	f 	= fetch
 	ci 	= commit -av
-	l 	= log -25 --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
+	l 	= log --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
 	lol 	= log --pretty=oneline --abbrev-commit --graph --decorate
 	lg 	= log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	d 	= diff
@@ -38,3 +38,6 @@
 	trustExitCode = true
 [merge]
 	defaultToUpstream = true
+	tool = fugitive
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"

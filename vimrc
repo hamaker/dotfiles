@@ -9,11 +9,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 " Plugins
-Bundle 'ervandew/supertab' 
-Bundle 'rking/ag.vim'
+Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-dispatch'
@@ -25,9 +24,9 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'Command-T'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'airblade/vim-gitgutter'
-
 " Syntax
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'groenewege/vim-less'
@@ -37,6 +36,7 @@ Bundle 'nono/vim-handlebars'
 Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
 
 colorscheme railscasts2
 
@@ -64,8 +64,6 @@ set smartcase                     " But case-sensitive if expression contains a 
 set number                        " Show line numbers.
 set ruler                         " Show cursor position.
 
-set incsearch                     " Highlight matches as you type.
-set hlsearch                      " Highlight matches.
 
 set wrap                          " Turn on line wrapping.
 set scrolloff=5                   " Show 3 lines of context around the cursor.
@@ -91,7 +89,13 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 set mouse=a
 " Or use vividchalk
 " colorscheme topfunky-light
- 
+
+set listchars=""
+set listchars=tab:\ \
+set listchars+=trail:.
+set listchars+=extends:>
+set listchars+=precedes:<
+
 " ========================================================================
 " "  Mappings
 " " ========================================================================
@@ -101,27 +105,29 @@ let mapleader=","
 
 nnoremap <leader><leader> <c-^>
 
-map <leader>.a :CommandT app/<cr>
-map <leader>.c :CommandT app/controllers<cr>
+map <leader>.a :CtrlP app/<cr>
+map <leader>.c :CtrlP app/controllers<cr>
+map <leader>.e :CtrlP app/exposers<cr>
 map <leader>.g :topleft :split Gemfile<cr>
-map <leader>.h :CommandT app/helpers<cr>
-map <leader>.j :CommandT app/assets/javascripts<cr>
-map <leader>.k :CommandT config<cr>
-map <leader>.l :CommandT lib<cr>
-map <leader>.m :CommandT app/models<cr>
+map <leader>.h :CtrlP app/helpers<cr>
+map <leader>.j :CtrlP app/assets/javascripts<cr>
+map <leader>.k :CtrlP config<cr>
+map <leader>.l :CtrlP lib<cr>
+map <leader>.m :CtrlP app/models<cr>
 map <leader>.r :topleft :split config/routes.rb<cr>
-map <leader>.p :CommandT public<cr>
-map <leader>.s :CommandT app/assets/stylesheets<cr>
-map <leader>.t :CommandT spec<cr>
-map <leader>.v :CommandT app/views<cr>
+map <leader>.p :CtrlP public<cr>
+map <leader>.s :CtrlP app/assets/stylesheets<cr>
+map <leader>.t :CtrlP spec<cr>
+map <leader>.v :CtrlP app/views<cr>
 map <leader>a :NERDTreeFind<cr>
 map <leader>A :NERDTreeToggle<cr>
 map <leader>b :Gblame<cr>
 map <leader>cc :TComment<cr>
 map <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 map <leader>d :Gdiff<cr>
-map <leader>F :CommandT %%<cr>
-map <leader>f :CommandT<cr>
+map <leader>F :CtrlP %%<cr>
+map <leader>f :CtrlP<cr>
+map <leader>h :set hlsearch! hlsearch?<cr>
 map <leader>i :%s/\t/  /g<CR> :KillWhitespace<CR>
 map <leader>n :call RenameFile()<cr>
 map <leader>o :! open .<cr><cr>
@@ -132,6 +138,7 @@ map <leader>q :bd<CR>
 map <leader>T :call RunCurrentLineInTest()<CR>
 map <leader>tr :call RunCurrentTest()<CR>
 map <leader>v :tabe $MYVIMRC<CR>
+map <leader>V :source $MYVIMRC<CR>
 map <leader>w :bp<CR>:bd#<CR>
 map <leader>W :KillWhitespace<CR>
 map <leader>x :bn<CR>
@@ -170,6 +177,7 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 " Searching
 set hlsearch
 set incsearch
+set incsearch
 set ignorecase
 set smartcase
 
@@ -187,8 +195,8 @@ set notimeout
 set ttyfast
 set ttyscroll=5
 
-set winheight=5
-set winminheight=5
+set winheight=10
+set winminheight=10
 set winheight=999
 
 let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
@@ -201,14 +209,17 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 " View full list when tab-complete in command mode
 set wildmode=list:full
-set wildignore+=*.log,tmp/**,log/**,public/assets/**,attachments/**,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.json,*.xml,*.flv,*.m4v
+set wildignore+=*.log,tmp/**,log/**,public/assets/**,attachments/**,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.json,*.xml,*.flv,*.m4v,*.sql,*.log
 " No difference between ; and ;
 " map ; :
 
-command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr>
+command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr> :let @/ = ""<cr>
 
-let g:CommandTCancelMap=['<ESC>','<C-c>']
-let CommandTMaxFiles = 10000
+let g:CtrlPCancelMap=['<ESC>','<C-c>']
+let CtrlPMaxFiles = 10000
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtClearCache()':      ['<F6>'],
+  \ }
 
 augroup myfiletypes
   autocmd!
@@ -239,13 +250,13 @@ function! RunCurrentTest()
       call SetTestRunner("!cucumber")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!bundle exec rspec")
+      call SetTestRunner("!rspec")
       exec g:bjo_test_runner g:bjo_test_file
     else
       call SetTestRunner("!ruby -Itest")
       exec g:bjo_test_runner g:bjo_test_file
     endif
-  else
+  elseif exists("g:bjo_test_file")
     exec g:bjo_test_runner g:bjo_test_file
   endif
 endfunction
@@ -258,9 +269,9 @@ function! RunCurrentLineInTest()
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFileWithLine()
+    exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
   end
 
-  exec "!bundle exec rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()

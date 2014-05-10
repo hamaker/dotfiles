@@ -3,6 +3,7 @@ PATH="/usr/local/bin:/Users/niels/.rbenv/bin:/usr/local/share/npm/bin/:$PATH"
 PATH="/Library/Developer/AndroidDeveloperTools/sdk/tools:$PATH"
 PATH="/Library/Developer/AndroidDeveloperTools/sdk/platform-tools:$PATH"
 PATH="./bin:$PATH"
+export PATH="$HOME/.rbenv/shims:$PATH"
 eval "$(rbenv init -)"
 source ~/.rbenv/completions/rbenv.bash
 source ~/dotfiles/bash_colours.bash
