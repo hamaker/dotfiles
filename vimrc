@@ -13,10 +13,11 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " Plugins
 Bundle 'ervandew/supertab'
-Bundle 'scrooloose/nerdtree'
+" Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-vinegar'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sensible'
@@ -27,6 +28,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'chrisbra/improvedft'
 " Syntax
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'groenewege/vim-less'
@@ -157,9 +159,6 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-" Uncomment to use Jamis Buck's file opening plugin
-" map <Leader>t :FuzzyFinderTextMate<Enter>
-
 " Controversial...swap colon and semicolon for easier commands
 "nnoremap ; :
 "nnoremap : ;
@@ -181,9 +180,14 @@ set incsearch
 set ignorecase
 set smartcase
 
-" Use Ack instead of grep
-set grepprg=ag
+" Use ag instead of grep
+set grepprg=ag\ --nogroup\ --nocolor
 let g:ackprg = 'ag --nogroup --column'
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
 
 " Able to 'gf' files
 set suffixesadd=.rb,.coffee,.js
@@ -209,7 +213,7 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 " View full list when tab-complete in command mode
 set wildmode=list:full
-set wildignore+=*.log,tmp/**,log/**,public/assets/**,attachments/**,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.json,*.xml,*.flv,*.m4v,*.sql,*.log
+set wildignore+=*.log,tmp/*,public/assets/*,attachments/*,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.json,*.xml,*.flv,*.m4v,*.sql,*.log
 " No difference between ; and ;
 " map ; :
 
@@ -256,7 +260,7 @@ function! RunCurrentTest()
       call SetTestRunner("!ruby -Itest")
       exec g:bjo_test_runner g:bjo_test_file
     endif
-  elseif exists("g:bjo_test_file")
+  else
     exec g:bjo_test_runner g:bjo_test_file
   endif
 endfunction
@@ -269,9 +273,8 @@ function! RunCurrentLineInTest()
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFileWithLine()
-    exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
   end
-
+  exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()

@@ -2,6 +2,7 @@
 	s 	= status --short
 	co 	= checkout
 	f 	= fetch
+  aa  = add --all
 	ci 	= commit -av
 	l 	= log --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
 	lol 	= log --pretty=oneline --abbrev-commit --graph --decorate
@@ -16,12 +17,13 @@
 	changed = show --pretty=\"format:\" --name-only
   sp  = stash pop
   pb  = push origin HEAD
+  reset-schema  = checkout db/schema.rb
 
 [push]
 	default = upstream
 [user]
 	name = Niels Hamaker
-	email = niels@brightin.nl
+	email = nielshamaker@gmail.com
 [color]
 	ui = true
 	branch = always
@@ -34,7 +36,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Users/niels/Library/Application Support/SourceTree/SourceTree 1.9.4.1/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [merge]
 	defaultToUpstream = true
