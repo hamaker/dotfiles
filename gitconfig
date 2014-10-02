@@ -5,7 +5,7 @@
   aa  = add --all
 	ci 	= commit -av
 	l 	= log --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
-	lol 	= log --pretty=oneline --abbrev-commit --graph --decorate
+	lol	= log --pretty=oneline --abbrev-commit --graph --decorate
 	lg 	= log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	d 	= diff
 	b 	= branch
@@ -18,6 +18,8 @@
   sp  = stash pop
   pb  = push origin HEAD
   reset-schema  = checkout db/schema.rb
+  pff = pull --ff
+  rbc = rebase --continue
 
 [push]
 	default = upstream
@@ -36,7 +38,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Users/niels/Library/Application Support/SourceTree/SourceTree 1.9.4.1/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Users/niels/Library/Application Support/SourceTree/SourceTree 1.9.7/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [merge]
 	defaultToUpstream = true

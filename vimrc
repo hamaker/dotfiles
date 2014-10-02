@@ -39,6 +39,13 @@ Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
+Bundle "sudar/vim-arduino-syntax"
+
+" tmux integration
+" Bundle 'benmills/vimux'
+" Bundle 'skalnik/vim-vroom'
+" let g:vroom_use_vimux = 1
+" let g:vroom_use_spring = 1
 
 colorscheme railscasts2
 
@@ -85,7 +92,7 @@ set expandtab                    " Use spaces instead of tabs
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}=%-16(\ %l,%c-%v\ %)%P
 
 "oh dear, that's sinful
 set mouse=a
@@ -99,11 +106,20 @@ set listchars+=extends:>
 set listchars+=precedes:<
 
 " ========================================================================
-" "  Mappings
-" " ========================================================================
+" Mappings
+" ========================================================================
 ca W w
 
-let mapleader=","
+" ========================================================================
+" NETRW
+" ========================================================================
+" let g:netrw_liststyle=3
+
+" ========================================================================
+" leader commands
+" ========================================================================
+
+let mapleader="\<Space>"
 
 nnoremap <leader><leader> <c-^>
 
@@ -127,6 +143,8 @@ map <leader>b :Gblame<cr>
 map <leader>cc :TComment<cr>
 map <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 map <leader>d :Gdiff<cr>
+" map <leader>e :VroomRunNearestTest<CR>
+map <leader>e :w<CR>:call RunCurrentLineInTest()<CR>
 map <leader>F :CtrlP %%<cr>
 map <leader>f :CtrlP<cr>
 map <leader>h :set hlsearch! hlsearch?<cr>
@@ -136,9 +154,9 @@ map <leader>o :! open .<cr><cr>
 map <leader>O :! open %%<cr><cr>
 map <leader>p "+p<cr>
 map <leader>r :!bundle exec rspec<cr>
+" map <leader>r :VroomRunTestFile<cr>
 map <leader>q :bd<CR>
-map <leader>T :call RunCurrentLineInTest()<CR>
-map <leader>tr :call RunCurrentTest()<CR>
+map <leader>tr :w<CR>:call RunCurrentTest()<CR>
 map <leader>v :tabe $MYVIMRC<CR>
 map <leader>V :source $MYVIMRC<CR>
 map <leader>w :bp<CR>:bd#<CR>
@@ -158,6 +176,8 @@ map <leader>tp :tabprevious<cr>
 map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
+map <leader><Tab> :tabnext<cr>
+map <leader><S-Tab> :tabprevious<cr>
 
 " Controversial...swap colon and semicolon for easier commands
 "nnoremap ; :
@@ -199,13 +219,14 @@ set notimeout
 set ttyfast
 set ttyscroll=5
 
-set winheight=10
-set winminheight=10
+set winheight=7
+set winminheight=7
 set winheight=999
 
 let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
 " set noshowmatch         " Don't match parentheses/brackets
 " set nocursorline        " Don't paint cursor line
+set cursorline
 set nocursorcolumn      " Don't paint cursor column
 " set lazyredraw          " Wait to redraw
 set scrolljump=1
@@ -213,7 +234,7 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 " View full list when tab-complete in command mode
 set wildmode=list:full
-set wildignore+=*.log,tmp/*,public/assets/*,attachments/*,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.json,*.xml,*.flv,*.m4v,*.sql,*.log
+set wildignore+=*.log,tmp/*,public/assets/*,attachments/*,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.xml,*.flv,*.m4v,*.sql,*.log
 " No difference between ; and ;
 " map ; :
 
@@ -254,7 +275,8 @@ function! RunCurrentTest()
       call SetTestRunner("!cucumber")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!rspec")
+      call SetTestRunner("!bundle exec rspec")
+      " call SetTestRunner("!spring rspec")
       exec g:bjo_test_runner g:bjo_test_file
     else
       call SetTestRunner("!ruby -Itest")
@@ -274,7 +296,8 @@ function! RunCurrentLineInTest()
   if in_test_file
     call SetTestFileWithLine()
   end
-  exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  " exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec "!bundle exec rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()
@@ -295,3 +318,9 @@ function! CorrectTestRunner()
     return "ruby"
   endif
 endfunction
+
+" lets go for it...
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
