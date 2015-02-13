@@ -24,31 +24,41 @@ Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-abolish'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'chrisbra/improvedft'
+Bundle 'bling/vim-airline'
 " Syntax
-Bundle 'elixir-lang/vim-elixir'
 Bundle 'groenewege/vim-less'
-Bundle 'heartsentwined/vim-ember-script'
+" Bundle 'heartsentwined/vim-ember-script'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'nono/vim-handlebars'
+" Bundle 'nono/vim-handlebars'
 Bundle 'slim-template/vim-slim'
-Bundle 'tpope/vim-cucumber'
+" Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
-Bundle "sudar/vim-arduino-syntax"
+Bundle 'sudar/vim-arduino-syntax'
+Bundle 'altercation/vim-colors-solarized'
 
 " tmux integration
 " Bundle 'benmills/vimux'
 " Bundle 'skalnik/vim-vroom'
 " let g:vroom_use_vimux = 1
 " let g:vroom_use_spring = 1
+set background=dark
+" solarized options 
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
+let g:solarized_termtrans=1
+colorscheme solarized
 
-colorscheme railscasts2
-
+let g:airline_powerline_fonts = 1
 
 silent! call pathogen#runtime_append_all_bundles()
 
@@ -164,7 +174,7 @@ map <leader>W :KillWhitespace<CR>
 map <leader>x :bn<CR>
 map <leader>y "+y<cr>
 map <leader>z :bp<CR>
-
+map <silent> <leader>/ :let @/=""<CR> 
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
