@@ -28,7 +28,7 @@
 	email = nielshamaker@gmail.com
 [color]
 	ui = true
-	branch = always
+	branch = true
 [status]
 	submodule = 1
 [core]

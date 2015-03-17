@@ -17,7 +17,9 @@ Bundle 'ervandew/supertab'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
+Bundle 'idanarye/vim-merginal'
 Bundle 'tpope/vim-vinegar'
+" Bundle 'jeetsukumaran/vim-filebeagle'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sensible'
@@ -52,11 +54,11 @@ Bundle 'altercation/vim-colors-solarized'
 " let g:vroom_use_vimux = 1
 " let g:vroom_use_spring = 1
 set background=dark
-" solarized options 
-" let g:solarized_visibility = "high"
-" let g:solarized_contrast = "high"
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
+" solarized options
+let g:solarized_hitrail = 0
+let g:solarized_termtrans = 1
+let g:solarized_visibility = 'high'
+" let g:solarized_termcolors=256
 
 colorscheme solarized
 
@@ -108,12 +110,11 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}=%-16(\ %l,%c-
 
 "oh dear, that's sinful
 set mouse=a
-" Or use vividchalk
-" colorscheme topfunky-light
 
+set list
 set listchars=""
 set listchars=tab:\ \
-set listchars+=trail:.
+set listchars+=trail:･
 set listchars+=extends:>
 set listchars+=precedes:<
 
@@ -125,6 +126,7 @@ ca W w
 " ========================================================================
 " NETRW
 " ========================================================================
+" set nocp
 " let g:netrw_liststyle=3
 
 " ========================================================================
@@ -176,7 +178,7 @@ map <leader>W :KillWhitespace<CR>
 map <leader>x :bn<CR>
 map <leader>y "+y<cr>
 map <leader>z :bp<CR>
-map <silent> <leader>/ :let @/=""<CR> 
+map <silent> <leader>/ :let @/=""<CR>
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
