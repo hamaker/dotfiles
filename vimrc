@@ -5,12 +5,13 @@ set nocompatible                  " Must come first because it changes other opt
 
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/share/lilypond/current/vim/
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 " Plugins
 Bundle 'ervandew/supertab'
 " Bundle 'scrooloose/nerdtree'
@@ -28,6 +29,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-rbenv'
 Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
 Bundle 'vim-ruby/vim-ruby'
@@ -36,6 +38,9 @@ Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'chrisbra/improvedft'
 Bundle 'bling/vim-airline'
+Plugin 'Valloric/YouCompleteMe'
+" tmux integration
+Plugin 'christoomey/vim-tmux-navigator'
 " Syntax
 Bundle 'groenewege/vim-less'
 " Bundle 'heartsentwined/vim-ember-script'
@@ -43,16 +48,18 @@ Bundle 'kchmck/vim-coffee-script'
 " Bundle 'nono/vim-handlebars'
 Bundle 'slim-template/vim-slim'
 " Bundle 'tpope/vim-cucumber'
+Bundle 'chase/vim-ansible-yaml'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'sudar/vim-arduino-syntax'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'elixir-lang/vim-elixir'
+" Bundle 'skalnik/vim-vroom'
+
+call vundle#end()
 
 " tmux integration
-" Bundle 'benmills/vimux'
-" Bundle 'skalnik/vim-vroom'
-" let g:vroom_use_vimux = 1
-" let g:vroom_use_spring = 1
+let g:tmux_navigator_save_on_switch = 1
 set background=dark
 " solarized options
 let g:solarized_hitrail = 0
@@ -111,9 +118,10 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}=%-16(\ %l,%c-
 "oh dear, that's sinful
 set mouse=a
 
-set list
+" set list
 set listchars=""
-set listchars=tab:\ \
+set listchars=tab:\ \ "commented for whitspace
+" set listchars=tab:\ \
 set listchars+=trail:･
 set listchars+=extends:>
 set listchars+=precedes:<
@@ -159,14 +167,17 @@ map <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 map <leader>d :Gdiff<cr>
 " map <leader>e :VroomRunNearestTest<CR>
 map <leader>e :w<CR>:call RunCurrentLineInTest()<CR>
+" map <leader>e :!bundle exec ./bin/rake test %<cr>
 map <leader>F :CtrlP %%<cr>
 map <leader>f :CtrlP<cr>
 map <leader>h :set hlsearch! hlsearch?<cr>
 map <leader>i :%s/\t/  /g<CR> :KillWhitespace<CR>
+map <leader>l :call CompileLilypond()<CR>
 map <leader>n :call RenameFile()<cr>
 map <leader>o :! open .<cr><cr>
 map <leader>O :! open %%<cr><cr>
 map <leader>p "+p<cr>
+" map <leader>r :!./bin/rake<cr>
 map <leader>r :!bundle exec rspec<cr>
 " map <leader>r :VroomRunTestFile<cr>
 map <leader>q :bd<CR>
@@ -248,7 +259,7 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 " View full list when tab-complete in command mode
 set wildmode=list:full
-set wildignore+=*.log,tmp/*,public/assets/*,attachments/*,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.xml,*.flv,*.m4v,*.sql,*.log
+set wildignore+=*.log,tmp/*,public/assets/*,attachments/*,*.jpg,*.ogg,*.mp3,*.mp4,*.gif,*.png,*.jpeg,*.svg,*.xml,*.flv,*.m4v,*.sql,*.log,.DS_Store
 " No difference between ; and ;
 " map ; :
 
@@ -311,7 +322,7 @@ function! RunCurrentLineInTest()
     call SetTestFileWithLine()
   end
   " exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
-  exec "!bundle exec rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec "!bin/rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()
@@ -334,7 +345,13 @@ function! CorrectTestRunner()
 endfunction
 
 " lets go for it...
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
+"
+function! CompileLilypond()
+  let currentFile = expand('%')
+  let pdfFile = substitute(currentFile, '\.ly', '.pdf', '')
+  exec "!lilypond % && open" pdfFile
+endfunction

@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/niels/code/1pc/capasa/.git/hooks'
-let g:netrw_dirhist_2='/Users/niels/code/1pc/capasa/.git'
-let g:netrw_dirhist_3='/Users/niels/code/1pc/capasa'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/niels/code/1pc/one_part_content/shop/app/controllers/one_part_content/admin/shop'
+let g:netrw_dirhist_2='/Users/niels/code/1pc/one_part_content/shop/app/controllers/one_part_content/admin'
+let g:netrw_dirhist_3='/Users/niels/code/1pc/one_part_content/shop/app/controllers/one_part_content'
+let g:netrw_dirhist_4='/Users/niels/code/1pc/one_part_content/shop/app/controllers'
+let g:netrw_dirhist_5='/Users/niels/code/1pc/one_part_content/shop/app'
+let g:netrw_dirhist_6='/Users/niels/code/1pc/one_part_content/shop'
