@@ -1,5 +1,5 @@
 echo $BASH_SOURCE
-PATH="/usr/local/bin:/Users/niels/.rbenv/bin:/usr/local/share/npm/bin/:$PATH"
+PATH="/usr/local/bin:/Users/niels/.rbenv/bin:/usr/local/share/npm/bin:$PATH"
 PATH="/Library/Developer/AndroidDeveloperTools/sdk/tools:$PATH"
 PATH="/Library/Developer/AndroidDeveloperTools/sdk/platform-tools:$PATH"
 PATH="./bin:$PATH"

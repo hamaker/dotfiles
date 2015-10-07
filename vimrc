@@ -38,7 +38,7 @@ Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'chrisbra/improvedft'
 Bundle 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 " tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
 " Syntax
@@ -57,6 +57,7 @@ Bundle 'elixir-lang/vim-elixir'
 " Bundle 'skalnik/vim-vroom'
 
 call vundle#end()
+filetype plugin on
 
 " tmux integration
 let g:tmux_navigator_save_on_switch = 1
@@ -70,6 +71,24 @@ let g:solarized_visibility = 'high'
 colorscheme solarized
 
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline_section_c = "%f"
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'warning' ]
+      \ ]
+
+call airline#parts#define_raw('modified', '%{&modified ? "[+]" : ""}')
+call airline#parts#define_accent('modified', 'red')
+let g:airline_section_c = 
+      \ airline#section#create(['%{pathshorten(expand("%:."))}', 'modified'])
+
+
+
 
 silent! call pathogen#runtime_append_all_bundles()
 
@@ -147,38 +166,27 @@ nnoremap <leader><leader> <c-^>
 
 map <leader>.a :CtrlP app/<cr>
 map <leader>.c :CtrlP app/controllers<cr>
-map <leader>.e :CtrlP app/exposers<cr>
 map <leader>.g :topleft :split Gemfile<cr>
-map <leader>.h :CtrlP app/helpers<cr>
 map <leader>.j :CtrlP app/assets/javascripts<cr>
-map <leader>.k :CtrlP config<cr>
-map <leader>.l :CtrlP lib<cr>
 map <leader>.m :CtrlP app/models<cr>
 map <leader>.r :topleft :split config/routes.rb<cr>
-map <leader>.p :CtrlP public<cr>
 map <leader>.s :CtrlP app/assets/stylesheets<cr>
 map <leader>.t :CtrlP spec<cr>
-map <leader>.v :CtrlP app/views<cr>
-map <leader>a :NERDTreeFind<cr>
-map <leader>A :NERDTreeToggle<cr>
 map <leader>b :Gblame<cr>
-map <leader>cc :TComment<cr>
-map <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
+map <leader>c :TComment<cr>
 map <leader>d :Gdiff<cr>
 " map <leader>e :VroomRunNearestTest<CR>
 map <leader>e :w<CR>:call RunCurrentLineInTest()<CR>
 " map <leader>e :!bundle exec ./bin/rake test %<cr>
-map <leader>F :CtrlP %%<cr>
+map <leader>F :CtrlPTag<cr>
 map <leader>f :CtrlP<cr>
 map <leader>h :set hlsearch! hlsearch?<cr>
 map <leader>i :%s/\t/  /g<CR> :KillWhitespace<CR>
 map <leader>l :call CompileLilypond()<CR>
 map <leader>n :call RenameFile()<cr>
-map <leader>o :! open .<cr><cr>
-map <leader>O :! open %%<cr><cr>
 map <leader>p "+p<cr>
 " map <leader>r :!./bin/rake<cr>
-map <leader>r :!bundle exec rspec<cr>
+map <leader>r :!bin/rspec<cr>
 " map <leader>r :VroomRunTestFile<cr>
 map <leader>q :bd<CR>
 map <leader>tr :w<CR>:call RunCurrentTest()<CR>
@@ -205,8 +213,8 @@ map <leader><Tab> :tabnext<cr>
 map <leader><S-Tab> :tabprevious<cr>
 
 " Controversial...swap colon and semicolon for easier commands
-"nnoremap ; :
-"nnoremap : ;
+" nnoremap ; :
+" nnoremap : ;
 
 "vnoremap ; :
 "vnoremap : ;
