@@ -48,12 +48,13 @@ Bundle 'kchmck/vim-coffee-script'
 " Bundle 'nono/vim-handlebars'
 Bundle 'slim-template/vim-slim'
 " Bundle 'tpope/vim-cucumber'
-Bundle 'chase/vim-ansible-yaml'
+Bundle 'pearofducks/ansible-vim'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'sudar/vim-arduino-syntax'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'elixir-lang/vim-elixir'
+Bundle 'fatih/vim-go'
 " Bundle 'skalnik/vim-vroom'
 
 call vundle#end()
@@ -87,10 +88,20 @@ call airline#parts#define_accent('modified', 'red')
 let g:airline_section_c = 
       \ airline#section#create(['%{pathshorten(expand("%:."))}', 'modified'])
 
+" configure whether close button should be shown
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 
 
-silent! call pathogen#runtime_append_all_bundles()
+" silent! call pathogen#runtime_append_all_bundles()
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
@@ -164,7 +175,7 @@ let mapleader="\<Space>"
 
 nnoremap <leader><leader> <c-^>
 
-map <leader>.a :CtrlP app/<cr>
+map <leader>a :CtrlP app/<cr>
 map <leader>.c :CtrlP app/controllers<cr>
 map <leader>.g :topleft :split Gemfile<cr>
 map <leader>.j :CtrlP app/assets/javascripts<cr>
@@ -174,11 +185,13 @@ map <leader>.s :CtrlP app/assets/stylesheets<cr>
 map <leader>.t :CtrlP spec<cr>
 map <leader>b :Gblame<cr>
 map <leader>c :TComment<cr>
+map <silent><leader>C :call system('ctags -R --languages=ruby --exclude=.git --exclude=log .')
+      \<cr>
 map <leader>d :Gdiff<cr>
 " map <leader>e :VroomRunNearestTest<CR>
 map <leader>e :w<CR>:call RunCurrentLineInTest()<CR>
 " map <leader>e :!bundle exec ./bin/rake test %<cr>
-map <leader>F :CtrlPTag<cr>
+map <leader>F :call RefreshCTags() <bar> CtrlPTag<cr>
 map <leader>f :CtrlP<cr>
 map <leader>h :set hlsearch! hlsearch?<cr>
 map <leader>i :%s/\t/  /g<CR> :KillWhitespace<CR>
@@ -362,4 +375,8 @@ function! CompileLilypond()
   let currentFile = expand('%')
   let pdfFile = substitute(currentFile, '\.ly', '.pdf', '')
   exec "!lilypond % && open" pdfFile
+endfunction
+
+function! RefreshCTags()
+  exec system('ctags -R --languages=ruby,Go --exclude=.git --exclude=log .')
 endfunction
