@@ -11,7 +11,6 @@
 	b 	= branch
 	m 	= merge
 	rh1	= reset --hard HEAD~1
-	cot	= checkout testing
 	com	= checkout master
 	rbm	= rebase master
 	changed = show --pretty=\"format:\" --name-only
@@ -45,3 +44,17 @@
 	tool = fugitive
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[github]
+	user = hamaker
+[ghi]
+	token = !security find-internet-password -a hamaker -s github.com -l 'ghi token' -w
+[pull]
+	rebase = true
+[diff]
+	compactionHeuristic = true
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[interactive]
+	diffFilter = diff-highlight

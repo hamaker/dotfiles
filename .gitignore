@@ -2,3 +2,14 @@ vim/bundle/*
 vim/tmp
 vim/.netrwhist
 vim/.netrwhist
+emacs.d/elpa
+emacs.d/project-explorer-cache
+emacs.d/games
+emacs.d/backups
+emacs.d/ac-comp-list
+emacs.d/ac-comphist.dat
+emacs.d/auto-save-list/*
+emacs.d/places
+emacs.d/projectile-bookmarks.eld
+emacs.d/projectile.cache
+emacs.d/rake.cache

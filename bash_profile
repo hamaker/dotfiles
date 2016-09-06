@@ -76,3 +76,6 @@ gmerge () {
   git checkout $1 && git pull && git merge "$branch" && git push && git checkout "$branch"
 }
   
+
+source /usr/local/lib/dnx/bin/dnvm.sh
+source /Users/niels/.rack/bash_autocomplete

@@ -1,5 +1,6 @@
 " Example Vim configuration.
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
+"
 
 set nocompatible                  " Must come first because it changes other options.
 
@@ -14,13 +15,11 @@ call vundle#begin()
 Bundle 'gmarik/Vundle.vim'
 " Plugins
 Bundle 'ervandew/supertab'
-" Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'idanarye/vim-merginal'
 Bundle 'tpope/vim-vinegar'
-" Bundle 'jeetsukumaran/vim-filebeagle'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sensible'
@@ -38,9 +37,11 @@ Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'chrisbra/improvedft'
 Bundle 'bling/vim-airline'
+Bundle 'Shougo/neocomplete.vim'
 " Plugin 'Valloric/YouCompleteMe'
 " tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'sjl/vitality.vim' "iterm 2 integration
 " Syntax
 Bundle 'groenewege/vim-less'
 " Bundle 'heartsentwined/vim-ember-script'
@@ -52,10 +53,15 @@ Bundle 'pearofducks/ansible-vim'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'sudar/vim-arduino-syntax'
-Bundle 'altercation/vim-colors-solarized'
+" Bundle 'altercation/vim-colors-solarized'
+Plugin 'adlawson/vim-sorcerer'
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'fatih/vim-go'
+" Bundle 'skammer/vim-css-color'
+Bundle 'ap/vim-css-color'
+" Bundle 'ingydotnet/yaml-vim'
 " Bundle 'skalnik/vim-vroom'
+" Bundle 'hwartig/vim-seeing-is-believing'
 
 call vundle#end()
 filetype plugin on
@@ -64,12 +70,12 @@ filetype plugin on
 let g:tmux_navigator_save_on_switch = 1
 set background=dark
 " solarized options
-let g:solarized_hitrail = 0
-let g:solarized_termtrans = 1
-let g:solarized_visibility = 'high'
+" let g:solarized_hitrail = 0
+" let g:solarized_termtrans = 1
+" let g:solarized_visibility = 'high'
 " let g:solarized_termcolors=256
-
-colorscheme solarized
+" colorscheme solarized
+colorscheme sorcerer
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -78,6 +84,7 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 " let g:airline_section_c = "%f"
+let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
       \ [ 'x', 'warning' ]
@@ -85,8 +92,12 @@ let g:airline#extensions#default#layout = [
 
 call airline#parts#define_raw('modified', '%{&modified ? "[+]" : ""}')
 call airline#parts#define_accent('modified', 'red')
-let g:airline_section_c = 
+let g:airline_section_c =
       \ airline#section#create(['%{pathshorten(expand("%:."))}', 'modified'])
+" function! SyntaxItem()
+"   return synIDattr(synID(line("."),col("."),1),"name")
+" endfunction
+" let g:airline_section_c += '%{SyntaxItem()}'
 
 " configure whether close button should be shown
 let g:airline#extensions#tabline#show_close_button = 0
@@ -124,6 +135,8 @@ set smartcase                     " But case-sensitive if expression contains a 
 set number                        " Show line numbers.
 set ruler                         " Show cursor position.
 
+set splitright
+set splitbelow
 
 set wrap                          " Turn on line wrapping.
 set scrolloff=5                   " Show 3 lines of context around the cursor.
@@ -150,12 +163,12 @@ set mouse=a
 
 " set list
 set listchars=""
-set listchars=tab:\ \ "commented for whitspace
-" set listchars=tab:\ \
+" set listchars=tab:>\ "commented for whitspace
+set listchars=tab:>･
 set listchars+=trail:･
 set listchars+=extends:>
 set listchars+=precedes:<
-
+set list
 " ========================================================================
 " Mappings
 " ========================================================================
@@ -195,7 +208,8 @@ map <leader>F :call RefreshCTags() <bar> CtrlPTag<cr>
 map <leader>f :CtrlP<cr>
 map <leader>h :set hlsearch! hlsearch?<cr>
 map <leader>i :%s/\t/  /g<CR> :KillWhitespace<CR>
-map <leader>l :call CompileLilypond()<CR>
+" map <leader>l :call CompileLilypond()<CR>
+map <leader>l :call InsertLookup<CR>
 map <leader>n :call RenameFile()<cr>
 map <leader>p "+p<cr>
 " map <leader>r :!./bin/rake<cr>
@@ -225,6 +239,9 @@ map <leader>tm :tabmove
 map <leader><Tab> :tabnext<cr>
 map <leader><S-Tab> :tabprevious<cr>
 
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " Controversial...swap colon and semicolon for easier commands
 " nnoremap ; :
 " nnoremap : ;
@@ -241,7 +258,6 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " Searching
 set hlsearch
-set incsearch
 set incsearch
 set ignorecase
 set smartcase
@@ -269,10 +285,10 @@ set winheight=7
 set winminheight=7
 set winheight=999
 
-let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
+" let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
 " set noshowmatch         " Don't match parentheses/brackets
-" set nocursorline        " Don't paint cursor line
-set cursorline
+set nocursorline        " Don't paint cursor line
+" set cursorline
 set nocursorcolumn      " Don't paint cursor column
 " set lazyredraw          " Wait to redraw
 set scrolljump=1
@@ -291,11 +307,11 @@ let CtrlPMaxFiles = 10000
 let g:ctrlp_prompt_mappings = {
   \ 'PrtClearCache()':      ['<F6>'],
   \ }
-
-augroup myfiletypes
-  autocmd!
-  autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
-augroup END
+"
+" augroup myfiletypes
+"   autocmd!
+"   autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
+" augroup END
 
 
 """"""""""""""""""""""""
@@ -342,8 +358,8 @@ function! RunCurrentLineInTest()
   if in_test_file
     call SetTestFileWithLine()
   end
-  " exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
-  exec "!bin/rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  " exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()
@@ -377,6 +393,28 @@ function! CompileLilypond()
   exec "!lilypond % && open" pdfFile
 endfunction
 
+function! InsertLookup()
+  :normal i{{lookup("credstash", "", region="us-east-1")}}
+endfunction
+
+:command! -nargs=1 LookupSingle :normal a {{lookup('credstash', '<args>', region='us-east-1')}}<ESC>
+:command! -nargs=1 LookupDouble :normal a {{lookup("credstash", "<args>", region="us-east-1")}}<ESC>
+
 function! RefreshCTags()
   exec system('ctags -R --languages=ruby,Go --exclude=.git --exclude=log .')
 endfunction
+
+" Enable seeing-is-believing mappings only for Ruby
+augroup seeingIsBelievingSettings
+  autocmd!
+
+  autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+
+  autocmd FileType ruby nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+
+  autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing-is-believing-run)
+augroup END
