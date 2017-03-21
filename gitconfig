@@ -1,19 +1,20 @@
 [alias]
-	s 	= status --short
-	co 	= checkout
-	f 	= fetch
+  s   = status --short
+  co  = checkout
+  f   = fetch
   aa  = add --all
-	ci 	= commit -av
-	l 	= log --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
-	lol	= log --pretty=oneline --abbrev-commit --graph --decorate
-	lg 	= log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	d 	= diff
-	b 	= branch
-	m 	= merge
-	rh1	= reset --hard HEAD~1
-	com	= checkout master
-	rbm	= rebase master
-	changed = show --pretty=\"format:\" --name-only
+  ci  = commit -av
+  l   = log --graph --pretty=format':%C(yellow)%h %Creset%C(cyan)%d%Creset %s%C(white), %Cgreen%an%Creset - %ar%Creset' 
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  d   = diff
+  b   = branch
+  m   = merge
+  rh1 = reset --hard HEAD~1
+  com = checkout master
+  rbm = rebase master
+  pushf  = push --force-with-lease
+  changed = show --pretty=\"format:\" --name-only
   sp  = stash pop
   pb  = push origin HEAD
   reset-schema  = checkout db/schema.rb
@@ -21,40 +22,40 @@
   rbc = rebase --continue
 
 [push]
-	default = upstream
+  default = upstream
 [user]
-	name = Niels Hamaker
-	email = nielshamaker@gmail.com
+  name = Niels Hamaker
+  email = nielshamaker@gmail.com
 [color]
-	ui = true
-	branch = true
+  ui = true
+  branch = true
 [status]
-	submodule = 1
+  submodule = 1
 [core]
-	excludesfile = /Users/niels/.gitignore_global
-	editor = /usr/local/bin/vim
+  excludesfile = /Users/niels/.gitignore_global
+  editor = /usr/local/bin/vim
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 [merge]
-	defaultToUpstream = true
-	tool = fugitive
+  defaultToUpstream = true
+  tool = fugitive
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+  cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [github]
-	user = hamaker
+  user = hamaker
 [ghi]
-	token = !security find-internet-password -a hamaker -s github.com -l 'ghi token' -w
+  token = !security find-internet-password -a hamaker -s github.com -l 'ghi token' -w
 [pull]
-	rebase = true
+  rebase = true
 [diff]
-	compactionHeuristic = true
+  compactionHeuristic = true
 [pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
 [interactive]
-	diffFilter = diff-highlight
+  diffFilter = diff-highlight

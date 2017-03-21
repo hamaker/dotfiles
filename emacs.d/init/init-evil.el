@@ -3,9 +3,21 @@
   (setq evil-intercept-esc 'always
         evil-want-fine-undo 'fine
         evil-shift-width 2)
+  (modify-syntax-entry ?_ "w")
   :config
   (evil-mode t)
   (evil-ex-define-cmd "W" "w")
+  (evil-ex-define-cmd "A" '(lambda ()
+                              (interactive)
+                              (projectile-rails-find-current-spec)))
+  (evil-ex-define-cmd "AV" '(lambda ()
+                              (interactive)
+                              (evil-window-vsplit)
+                              (windmove-right)
+                              (projectile-rails-find-current-spec)))
+  (evil-define-key 'normal magit-blame-mode-map (kbd "q") 'magit-blame-quit)
+  (evil-define-key 'normal magit-blame-mode-map (kbd "RET") 'magit-show-commit)
+  (add-hook 'magit-blame-mode-hook '(lambda () (evil-normalize-keymaps)))
 
   (keys :states nil
         :keymaps '(minibuffer-local-map
@@ -20,10 +32,29 @@
         "C-h" 'evil-window-left
         "C-j" 'evil-window-down
         "C-k" 'evil-window-up
-        "C-l" 'evil-window-right)
+        "C-l" 'evil-window-right
+        "[ SPC" 'insert-newline-above
+        "] SPC" 'insert-newline-below)
 
   (keys :states 'normal
-        "-" '(dired-current)))
+        "-" '(dired-current)
+        "#" '(evil-search-word-forward))
+
+  (keys-l :states 'visual
+        "Y" 'pbcopy)
+
+
+  (lexical-let ((default-color (cons (face-background 'mode-line)
+                                     (face-foreground 'mode-line))))
+    (add-hook 'post-command-hook
+              (lambda ()
+                (let ((color (cond ((minibufferp) default-color)
+                                   ((evil-insert-state-p) '("#2010ff" . "#ffffff"))
+                                   ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+                                   ((buffer-modified-p)   '("#d01f00" . "#ffffff"))
+                                   (t default-color))))
+                  (set-face-background 'mode-line (car color))
+                  (set-face-foreground 'mode-line (cdr color)))))))
 
 (use-package evil-surround
   :config
@@ -34,7 +65,7 @@
   :init
   (keys-l
    :states '(normal visual)
-   "cc" 'evilnc-comment-or-uncomment-lines))
+   "c" 'evilnc-comment-or-uncomment-lines))
 
 (use-package evil-search-highlight-persist
   :init

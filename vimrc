@@ -184,7 +184,7 @@ ca W w
 " leader commands
 " ========================================================================
 
-let mapleader="\<Space>"
+let mapleader=","
 
 nnoremap <leader><leader> <c-^>
 
@@ -213,7 +213,7 @@ map <leader>l :call InsertLookup<CR>
 map <leader>n :call RenameFile()<cr>
 map <leader>p "+p<cr>
 " map <leader>r :!./bin/rake<cr>
-map <leader>r :!bin/rspec<cr>
+map <leader>r :call RunCurrentTest()<cr>
 " map <leader>r :VroomRunTestFile<cr>
 map <leader>q :bd<CR>
 map <leader>tr :w<CR>:call RunCurrentTest()<CR>
@@ -255,6 +255,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+autocmd FileType c,cpp,java,php,ruby,html,eruby,vim autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " Searching
 set hlsearch
@@ -337,8 +338,8 @@ function! RunCurrentTest()
       call SetTestRunner("!cucumber")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!bundle exec rspec")
       " call SetTestRunner("!spring rspec")
+      call SetTestRunner("!zeus rspec")
       exec g:bjo_test_runner g:bjo_test_file
     else
       call SetTestRunner("!ruby -Itest")
@@ -358,7 +359,7 @@ function! RunCurrentLineInTest()
   if in_test_file
     call SetTestFileWithLine()
   end
-  exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec "!zeus rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
   " exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 

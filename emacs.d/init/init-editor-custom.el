@@ -1,6 +1,5 @@
 ;; Show column and linum in mode-line
 (line-number-mode 1)
-(column-number-mode 1)
 
 ;; Nowrap
 (setq-default truncate-lines t)
@@ -30,10 +29,11 @@
 ;; just type y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; adjustable text-size
-(global-set-key (kbd "C-=") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
+;; ;; adjustable text-size
+;; (global-set-key (kbd "C-=") 'text-scale-increase)
+;; (global-set-key (kbd "C--") 'text-scale-decrease)
 
+(setq window-min-height 10)
 ;; use system clipboard
 (setq x-select-enable-clipboard t)
 
@@ -79,12 +79,21 @@
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
+;; (setq ruby-end-insert-newline nil)
+
 ;; font settings
 (set-face-attribute 'default nil :height 150)
 (setq-default line-spacing 4)
 
 ;; Automatically remove trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'comint-exec-hook 'evil-normal-state)
+(add-hook 'comint-exec-hook 'visual-line-mode)
+(add-hook 'comint-exec-hook (lambda () (linum-mode 0)))
+(add-hook 'ag-mode-hook (lambda () (linum-mode 0)))
+(add-hook 'prog-mode-hook (lambda () (linum-mode 1)))
+(add-hook 'rubocop-mode-hook (lambda () (linum-mode 0)))
+(add-hook 'rubocop-mode-hook (lambda () (visual-line-mode 1)))
 
 ;; Less intriguing colors for isearch
 (custom-set-faces
@@ -112,11 +121,12 @@
 (bind-keys :map dired-mode-map
            ("-" . dired-up-directory))
 
-(modify-syntax-entry ?_ "w")
-(modify-syntax-entry ?- "w")
-
 (setq js-indent-level 2)
 (global-hl-line-mode)
 (xterm-mouse-mode)
 
+(set-face-foreground 'mode-line "#ffffff")
+(set-face-background 'mode-line "#2c2c2c")
+(set-face-background 'mode-line-inactive "#1d1d1d")
+(setq path-to-ctags "/usr/local/bin/ctags")
 (provide 'init-editor-custom)
