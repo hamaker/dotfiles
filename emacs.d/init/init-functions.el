@@ -61,11 +61,12 @@
 (defun pbcopy ()
   (interactive)
   (let ((deactivate-mark t))
-    (call-process-region (point) (mark) "pbcopy")))
+    (call-process-region (point) (mark) "xclip" nil nil nil "-selection" "c")))
+
 
 (defun pbpaste ()
   (interactive)
-  (call-process-region (point) (if mark-active (mark) (point)) "pbpaste" t t))
+  (call-process-region (point) (if mark-active (mark) (point)) "xclip" t t nil "-selection" "c" "-o"))
 
 (defun save-and-ruby-test-run ()
   (interactive)
@@ -97,6 +98,8 @@ w.r.t. indentation."
   (interactive)
   (beginning-of-line)
   (newline)
+  (indent-for-tab-command)
+  (back-to-indentation)
   )
 
 (defun insert-newline-below ()
@@ -104,7 +107,10 @@ w.r.t. indentation."
 w.r.t. indentation."
   (interactive)
   (end-of-line)
-  (newline))
+  (newline)
+  (indent-for-tab-command)
+  (back-to-indentation)
+  )
 
 (defun create-tags (dir-name)
   "Create tags file."
@@ -119,5 +125,12 @@ w.r.t. indentation."
   (move-beginning-of-line nil)
   (re-search-forward "\\(\\w+\\) = \\(.*\\)$" nil t)
   (replace-match "let(:\\1) { \\2 }" ))
+
+(defun ruby-symbol-to-string ()
+  "changes an assignment to a let statement"
+  (interactive)
+  (re-search-backward ":")
+  (re-search-forward ":\\(\\w+\\)" nil t)
+  (replace-match "'\\1'" ))
 
 (provide 'init-functions)

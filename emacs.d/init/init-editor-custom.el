@@ -47,9 +47,6 @@
   (when (string= "*Messages*" (buffer-name))
     (previous-buffer)))
 
-;; Automaticaly add newline at and of document
-(setq require-final-newline t)
-
 ;; Disable highlighting of matching par
 (setq show-paren-mode t)
 
@@ -90,10 +87,12 @@
 (add-hook 'comint-exec-hook 'evil-normal-state)
 (add-hook 'comint-exec-hook 'visual-line-mode)
 (add-hook 'comint-exec-hook (lambda () (linum-mode 0)))
+(add-hook 'comint-exec-hook 'evil-emacs-state)
 (add-hook 'ag-mode-hook (lambda () (linum-mode 0)))
 (add-hook 'prog-mode-hook (lambda () (linum-mode 1)))
 (add-hook 'rubocop-mode-hook (lambda () (linum-mode 0)))
 (add-hook 'rubocop-mode-hook (lambda () (visual-line-mode 1)))
+(add-to-list 'default-frame-alist '(background-color . "black"))
 
 ;; Less intriguing colors for isearch
 (custom-set-faces
@@ -121,9 +120,9 @@
 (bind-keys :map dired-mode-map
            ("-" . dired-up-directory))
 
-(setq js-indent-level 2)
 (global-hl-line-mode)
 (xterm-mouse-mode)
+(setq tab-width 4)
 
 (set-face-foreground 'mode-line "#ffffff")
 (set-face-background 'mode-line "#2c2c2c")

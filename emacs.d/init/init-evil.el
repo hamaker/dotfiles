@@ -17,6 +17,9 @@
                               (projectile-rails-find-current-spec)))
   (evil-define-key 'normal magit-blame-mode-map (kbd "q") 'magit-blame-quit)
   (evil-define-key 'normal magit-blame-mode-map (kbd "RET") 'magit-show-commit)
+  (define-key evil-insert-state-map (kbd "M-RET") 'evil-open-above)
+  (define-key evil-normal-state-map (kbd "M-RET") 'evil-open-above)
+  (define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
   (add-hook 'magit-blame-mode-hook '(lambda () (evil-normalize-keymaps)))
 
   (keys :states nil
@@ -26,6 +29,8 @@
                    minibuffer-local-must-match-map
                    minibuffer-local-isearch-map)
         [escape] 'minibuffer-keyboard-quit)
+
+
 
   (keys "C-n" 'next-error
         "C-p" 'previous-error

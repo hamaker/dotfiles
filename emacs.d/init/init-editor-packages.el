@@ -51,6 +51,12 @@
             "m" 'maximize-window-vertically
             "SPC" 'toggle-maximize-buffer)))
 
+(use-package enh-ruby-mode
+  :config
+  (keys-l "S" 'ruby-symbol-to-string)
+  (add-to-list 'auto-mode-alist
+               '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
+
 (use-package undo-tree
   :diminish undo-tree-mode
   :config
@@ -127,5 +133,10 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-enable-auto-pairing t))
+
+(use-package rubocop
+  :config
+  (keys-l "R" 'rubocop-check-project))
+
 
 (provide 'init-editor-packages)

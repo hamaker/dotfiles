@@ -32,8 +32,8 @@
 [status]
   submodule = 1
 [core]
-  excludesfile = /Users/niels/.gitignore_global
-  editor = /usr/local/bin/vim
+  excludesfile = ~/.gitignore_global
+  editor = vim
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path = 
