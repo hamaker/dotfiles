@@ -133,4 +133,9 @@ w.r.t. indentation."
   (re-search-forward ":\\(\\w+\\)" nil t)
   (replace-match "'\\1'" ))
 
+(defun reload-firefox ()
+  "reloads the current page in all Firefox windows"
+  (interactive)
+  (shell-command  "xdotool search --name \"Mozilla Firefox\" | xargs -n1 xvkbd -text \"\\[F5]\" -window" nil nil))
+
 (provide 'init-functions)

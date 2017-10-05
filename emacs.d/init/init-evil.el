@@ -17,8 +17,8 @@
                               (projectile-rails-find-current-spec)))
   (evil-define-key 'normal magit-blame-mode-map (kbd "q") 'magit-blame-quit)
   (evil-define-key 'normal magit-blame-mode-map (kbd "RET") 'magit-show-commit)
-  (define-key evil-insert-state-map (kbd "M-RET") 'evil-open-above)
-  (define-key evil-normal-state-map (kbd "M-RET") 'evil-open-above)
+  (define-key evil-insert-state-map (kbd "M-RET") 'evil-open-below)
+  (define-key evil-normal-state-map (kbd "S-M-RET") 'evil-open-above)
   (define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
   (add-hook 'magit-blame-mode-hook '(lambda () (evil-normalize-keymaps)))
 
@@ -77,6 +77,7 @@
   (global-evil-search-highlight-persist t)
   :config
   (keys :keymaps 'prog-mode-map
+        :states '(normal)
         "RET" 'evil-search-highlight-persist-remove-all))
 
 (provide 'init-evil)

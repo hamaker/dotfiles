@@ -1,18 +1,22 @@
 Xft.dpi: 160
-Xft.autohint: 1
+Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
+Xft.hintstyle:  hintmedium
 Xft.hinting: 1
+Xft.rgba: rgb
 Xft.antialias: 1
+
+Emacs.FontBackend: xft
 
 ! This worked well
 ! URxvt*font: xft:Fira Mono:size=12,xft:Inconsolata for Powerline:size=12,-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
- URxvt*font: xft:Source Code Pro:semibold:size=12,xft:Inconsolata for Powerline:size=12,-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
-! URxvt*font: xft:Fira Mono:pixelsize=24,xft:PowerlineSymbols:pixelsize=24,-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+URxvt*font: xft:Source Code Pro:semibold:size=12,xft:Inconsolata for Powerline:size=12,-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt.perl-ext-common: default,font-size,selection-to-clipboard,matcher
 URxvt.clipboard.autocopy: true
-URxvt.keysym.C-Up:     perl:font-size:increase
-URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-Up:     perl:font-size:incglobal
+URxvt.keysym.C-Down:   perl:font-size:decglobal
+URxvt.keysym.C-M-Up:     perl:font-size:increase
+URxvt.keysym.C-M-Down:   perl:font-size:decrease
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 URxvt.matcher.rend.0: Uline

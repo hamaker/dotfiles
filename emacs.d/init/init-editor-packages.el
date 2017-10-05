@@ -28,7 +28,7 @@
 (use-package general
   :config
   (progn
-    (setq general-default-states '(normal emacs motion))
+    (setq general-default-states '(normal motion))
     (general-create-definer keys-l :prefix ",")
     (defalias 'keys 'general-define-key)
 
@@ -61,6 +61,10 @@
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode t))
+
+(use-package dired+
+  :config
+  (diredp-toggle-find-file-reuse-dir 1))
 
 (use-package ag
   :defer t

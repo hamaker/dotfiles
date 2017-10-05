@@ -164,8 +164,8 @@ set mouse=a
 " set list
 set listchars=""
 " set listchars=tab:>\ "commented for whitspace
-set listchars=tab:>･
-set listchars+=trail:･
+set listchars=tab:>·
+set listchars+=trail:·
 set listchars+=extends:>
 set listchars+=precedes:<
 set list

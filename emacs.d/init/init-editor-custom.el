@@ -79,7 +79,6 @@
 ;; (setq ruby-end-insert-newline nil)
 
 ;; font settings
-(set-face-attribute 'default nil :height 150)
 (setq-default line-spacing 4)
 
 ;; Automatically remove trailing whitespace
@@ -106,9 +105,6 @@
 
 ;; revert buffers automatically when underlying files are changed externally
 (global-auto-revert-mode t)
-
-;; Use aspell for spell checking: brew install aspell --lang=en
-(setq ispell-program-name "/usr/local/bin/aspell")
 
 ;; Move to trash when deleting stuff
 (setq delete-by-moving-to-trash t
