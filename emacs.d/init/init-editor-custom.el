@@ -124,4 +124,8 @@
 (set-face-background 'mode-line "#2c2c2c")
 (set-face-background 'mode-line-inactive "#1d1d1d")
 (setq path-to-ctags "/usr/local/bin/ctags")
+
+(keys-l "1" 'window-configuration-to-register)
+(keys-l "2" 'window-configuration-from-register)
+
 (provide 'init-editor-custom)

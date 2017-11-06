@@ -65,13 +65,14 @@
  '(enh-ruby-deep-indent-paren nil)
  '(frame-background-mode (quote dark))
  '(global-linum-mode t)
+ '(helm-exit-idle-delay 0)
  '(ispell-program-name "/usr/bin/aspell")
  '(nil nil t)
  '(org-startup-folded nil)
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (bundler csv-mode git-gutter apib-mode win-switch snippet cucumber-goto-step lua-mode helm-ag feature-mode gherkin-mode evil-repeat smooth-scrolling rubocop dired-sort fuzzy dired+ move-text gotest yaml-mode discover yafolding web-mode minitest ruby-end evil-numbers ruby-test-mode hlinum auto-complete go-mode coffee-mode powerline-evil smart-mode-line-powerline-theme haml-mode rspec-mode projectile-rails ## alchemist evil-cleverparens indent-guide aggressive-indent paredit magit evil-search-highlight-persist evil-nerd-commenter evil-surround evil which-key use-package undo-tree helm-projectile general exec-path-from-shell better-defaults base16-theme ag)))
+    (tabbar terraform-mode company enh-ruby-mode bundler csv-mode git-gutter apib-mode win-switch snippet cucumber-goto-step lua-mode helm-ag feature-mode gherkin-mode evil-repeat smooth-scrolling rubocop dired-sort fuzzy dired+ move-text gotest yaml-mode discover yafolding web-mode minitest ruby-end evil-numbers ruby-test-mode hlinum auto-complete go-mode coffee-mode powerline-evil smart-mode-line-powerline-theme haml-mode rspec-mode projectile-rails ## alchemist evil-cleverparens indent-guide aggressive-indent paredit magit evil-search-highlight-persist evil-nerd-commenter evil-surround evil which-key use-package undo-tree helm-projectile general exec-path-from-shell better-defaults base16-theme ag)))
  '(require-final-newline (quote visit-save))
  '(rspec-command-options "--format p")
  '(ruby-insert-encoding-magic-comment nil)
@@ -154,7 +155,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#d8d8d8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-bold :height 120 :width normal :foundry "ADBO" :family "Source Code Pro"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#d8d8d8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-bold :height 67 :width normal :foundry "ADBO" :family "Source Code Pro"))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#fff" :foreground "#333"))))
  '(font-lock-comment-face ((t (:foreground "color-243"))))
  '(isearch ((t (:background "#fff" :foreground "#555"))))

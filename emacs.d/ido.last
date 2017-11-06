@@ -1,0 +1,33 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/niels/" . "code/")
+ ("/home/niels/code/1pc/" . "procure_wizard/")
+ ("/home/niels/code/" . "1pc/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/niels/code/1pc/procure_wizard/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "report.org"
+ "PW.bak"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/niels/code/1pc/procure_wizard/" (22988 4326 454988 759000) ".~lock.report-Amazon Aurora (MySQL compatible)-2017-09-25-04-41.csv#" "report-Amazon RDS for PostgreSQL-2017-09-25-04-41_Summary.csv" "report-Amazon RDS for PostgreSQL-2017-09-25-04-41.csv" "report-Amazon RDS for MySQL-2017-09-25-04-41_Summary.csv" "report-Amazon RDS for MySQL-2017-09-25-04-41.csv" "report-Amazon Aurora (MySQL compatible)-2017-09-25-04-41_Summary.csv" "report-Amazon Aurora (MySQL compatible)-2017-09-25-04-41.csv" "report.pdf" "report-db-conversion.zip" "PW.bak" "vagrant/" "plan.notes" "mssql/" "citus.notes" "procure_wizard.notes" "ProcureWizard Database Development Strategy_Scoping Report - Notes Niels.docx" "ProcureWizard Database Development Strategy_Scoping Report - With amendments Niels.docx" "../" "./")
+
+ ("/home/niels/code/" (22982 51394 239254 256000) "long-lines.txt" "lines.txt" "system/" "random/" "1pc/" "personal/" "../" "./")
+
+ ("/home/niels/" (22988 45644 899161 47000) ".viminfo" ".histfile" ".lesshst" "FP2/" ".mysql_history" ".gphoto/" "long-lines.txt" ".vagrant.d/" ".Xauthority" ".ICEauthority" ".java/" ".DataGrip2017.2/" ".tuxpaint/" ".odbc.ini" ".nuget/" ".zcompdump" "nohup.out" ".templateengine/" ".dotnet/" "dotnet-sdk-2.0.0-linux-x64.tar.gz" ".vscode/" ".python_history" ".chpwd-recent-dirs" ".dropbox-dist/" "VirtualBox VMs/" ".toprc" ".ghc/" ".psql_history" "bin/" ".aws/" "Screenshot from 2017-08-11 15-47-51.png" "Screenshot from 2017-08-11 15-44-58.png" "Screenshot.png" "Screenshot from 2017-08-11 12-13-29.png" ".viminfw.tmp" ".viminfx.tmp" "Screenshot from 2017-08-08 16-15-06.png" "go/" ".node-gyp/" ".npmrc" ".npm/" ".easy-ebook-viewer.conf" "src/" "ebooks/" ".wpa_cli_history" "db_dump_20170629_1254.sql" "db_dump_20170421_0935.sql" ".warzone2100-3.2/" "db_dump_20170621_1144.sql" ".Xmodmap" ".Xmodmap2" ".ruby_inline/" "synclientsettings" "boeking_laura.pdf" "photos/" ".qws/" "movies/" ".xinitrc" ".xprofile" ".Xresources" "random/" ".Trash/" ".bash_history" ".gitignore_global" ".warzone2100-3.1/" ".steampid" ".steampath" ".steam/" "Niels/" ".node_repl_history" ".gcalcli_cache" ".gstreamer-0.10/" ".bogofilter/" ".viminfy.tmp" ".viminfz.tmp" ".thunderbird/" ".w3m/" ".thumbnails/" ".gimp-2.8/" ".gnome/" ".macromedia/" ".adobe/" ".gcalclirc" ".gcalcli_oauth" "gcalcli-3.3.2.patch" ".irbrc" ".zshprompt" ".irb-save-history" ".gemrc" ".rbenv/" ".xsession-errors" ".xsession-errors.old" ".dmrc" ".viminfo.tmp" ".gtkrc-2.0" ".fontypython/" "test.wav" ".asoundrc" ".zshenv" ".gnupg/" ".zcompcache/" ".dbus/" "Dropbox/" "library/" ".gitconfig" ".bundle/" "code/" ".gem/" ".dropbox/" "LICENSE_OFL.txt" ".emacs.d/" ".claws-mail/" ".pki/" ".vim/" ".vimrc" "colors.pl" "dotfiles/" ".conkyrc" ".config/" ".local/" "Downloads/" ".lastpass/" "Desktop/" ".mozilla/" ".cache/" ".awesome-errors" ".zshrc" ".bash_logout" ".bash_profile" ".bashrc" ".ssh/" "../" "./")
+
+ ("/home/niels/code/1pc/" (22979 35816 662453 441000) "dotnet_test/" "benefits-of-jira.txt" "velocitylight-spree/" "procure_wizard/" "citus.notes" "rule10/" "telematics-whitelabel/" "_winfred/" "20170508101051_drop_columns_from_borrower_company_member.rb" "20170508094411_drop_columns_from_company_member.rb" "winfred/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
