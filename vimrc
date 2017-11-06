@@ -59,6 +59,8 @@ Bundle 'elixir-lang/vim-elixir'
 Bundle 'fatih/vim-go'
 " Bundle 'skammer/vim-css-color'
 Bundle 'ap/vim-css-color'
+Plugin 'chriskempson/base16-vim'
+
 " Bundle 'ingydotnet/yaml-vim'
 " Bundle 'skalnik/vim-vroom'
 " Bundle 'hwartig/vim-seeing-is-believing'
@@ -75,7 +77,7 @@ set background=dark
 " let g:solarized_visibility = 'high'
 " let g:solarized_termcolors=256
 " colorscheme solarized
-colorscheme sorcerer
+colorscheme base16-default-dark
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
