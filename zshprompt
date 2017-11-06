@@ -1,0 +1,32 @@
+# git theming
+setopt promptsubst
+function current_sha() {
+  # if [ -d .git ] ; then
+    sha=$(command git rev-parse --short HEAD 2> /dev/null)
+    print "${sha}"
+  # fi
+}
+
+function current_branch() {
+  branch=$(git branch 2> /dev/null | grep '*' | awk '{ print $2 }' 2> /dev/null)
+  if [ ! -z $branch ] ; then 
+    print "%F{blue}[ %F{yellow}$branch %F{blue}]"
+  fi
+}
+
+function current_ruby_version() {
+  echo $(rbenv version | awk '{ match($1,/[123]\.[0-9]/,out); print out[0] }')
+}
+RPROMPT='%F{yellow}$(current_sha)%f'
+# PROMPT='
+# %F{blue}[%F{red}%*%F{blue}][%F{green}%n@%m:%~%F{blue}][ %F{white}$(current_ruby_version)%F{blue} ][%F{yellow} $(current_branch) %F{blue}]
+# %F{white}$ '
+PROMPT='
+%F{blue}[%F{red}%*%F{blue}][%B%F{green}%~%b%F{blue}][ %F{white}$(current_ruby_version)%F{blue} ]$(current_branch)
+%F{white}$ '
+
+ZSH_THEME_GIT_PROMPT_PREFIX="\n%F{green}("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")$reset_color"
+ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
+ZSH_THEME_GIT_PROMPT_DIRTY=" ✗"
+
