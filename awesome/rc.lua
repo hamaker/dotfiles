@@ -6,14 +6,15 @@ require("awful.remote")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
-local beautiful = require("beautiful")
+beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local volume_control = require("volume-control")
-local net_widgets = require("net_widgets")
 local battery_widget = require("battery-widget")
+local cyclefocus = require("cyclefocus")
+local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -42,7 +43,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+-- beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+beautiful.init("~/.config/awesome/themes/custom/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -121,6 +123,39 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+cpuwidget = wibox.widget.graph()
+cpuwidget:set_width(50)
+cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 50, 0 },
+stops = { { 0, "#FF5656" }, { 0.5, "#88A175" }, { 1, "#AECF96" }}})
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 2)
+cpuwidget = wibox.widget({
+  wibox.container.mirror(cpuwidget, { horizontal = true } ),
+  wibox.widget{
+    markup = 'CPU',
+    align  = 'center',
+    valign = 'top',
+    widget = wibox.widget.textbox
+  },
+  layout = wibox.layout.stack
+})
+memwidget = wibox.widget.graph()
+memwidget:set_width(50)
+memwidget:set_background_color("#494B4F")
+memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 50, 0 },
+stops = { { 0, "#FF5656" }, { 0.5, "#88A175" }, { 1, "#AECF96" }}})
+vicious.register(memwidget, vicious.widgets.mem, "$1", 5)
+memwidget = wibox.widget({
+  wibox.container.mirror(memwidget, { horizontal = true } ),
+  wibox.widget{
+    markup = 'MEM',
+    align  = 'center',
+    valign = 'top',
+    widget = wibox.widget.textbox
+  },
+  layout = wibox.layout.stack
+})
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -183,12 +218,8 @@ volumecfg = volume_control({
     device = "pulse"
 })
 
-net_wireless = net_widgets.wireless({
-  interface = "wlp58s0"
-})
-
 battery = battery_widget({
-  adapter = "BAT0" 
+  adapter = "BAT0"
 })
 
 awful.screen.connect_for_each_screen(function(s)
@@ -224,6 +255,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
+            cpuwidget,
+            memwidget,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
@@ -311,6 +344,12 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "b", function () awful.spawn("firefox-developer-bin") end,
+              {description = "open a brosers (FF Dev)", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () awful.spawn("emacsclient -c") end,
+              {description = "open an emacsclient", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "m", function () awful.spawn("evolution") end,
+              {description = "open an mail client", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -343,14 +382,14 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey }, "r", 
+    awful.key({ modkey }, "r",
               function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
-    awful.key({modkey }, "space", 
+    awful.key({modkey }, "space",
               function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey }, "#", 
+    awful.key({ modkey }, "#",
               function () awful.spawn('slock') end,
               {description = "lock screen", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "\\",
@@ -367,9 +406,17 @@ globalkeys = awful.util.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+    awful.key({ modkey, "Control" }, "x", function () awful.util.spawn("xrandr --auto", false) end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey }, "Tab", function(c)
+      cyclefocus.cycle({modifier="Super_L"})
+    end),
+    -- modkey+Shift+Tab: backwards
+    awful.key({ modkey, "Shift" }, "Tab", function(c)
+      cyclefocus.cycle({modifier="Super_L"})
+    end)
 )
 
 clientkeys = awful.util.table.join(
@@ -390,6 +437,8 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index-1) end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
@@ -514,8 +563,8 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { 
-      rule_any = {type = { "normal", "dialog" } }, 
+    {
+      rule_any = {type = { "normal", "dialog" } },
       except_any = { class = { "URxvt", "Emacs" } },
       properties = { titlebars_enabled = true }
     },
