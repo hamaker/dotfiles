@@ -20,8 +20,8 @@
 (require 'init-evil)
 (require 'init-magit)
 (require 'init-org)
-(require 'init-lisp)
-(require 'init-go)
+ (require 'init-lisp)
+ (require 'init-go)
 
 ;; (require 'init-clojure)
 ; (require 'symbol-focus)
@@ -67,16 +67,14 @@
  '(global-linum-mode t)
  '(helm-exit-idle-delay 0)
  '(ispell-program-name "/usr/bin/aspell")
- '(js-indent-level 2)
  '(nil nil t)
  '(org-startup-folded nil)
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (csharp-mode jsx-mode jinja2-mode tabbar terraform-mode company enh-ruby-mode bundler csv-mode git-gutter apib-mode win-switch snippet cucumber-goto-step lua-mode helm-ag feature-mode gherkin-mode evil-repeat smooth-scrolling rubocop dired-sort fuzzy dired+ move-text gotest yaml-mode discover yafolding web-mode minitest ruby-end evil-numbers ruby-test-mode hlinum auto-complete go-mode coffee-mode powerline-evil smart-mode-line-powerline-theme haml-mode rspec-mode projectile-rails ## alchemist evil-cleverparens indent-guide aggressive-indent paredit magit evil-search-highlight-persist evil-nerd-commenter evil-surround evil which-key use-package undo-tree helm-projectile general exec-path-from-shell better-defaults base16-theme ag)))
+    (tabbar terraform-mode company enh-ruby-mode bundler csv-mode git-gutter apib-mode win-switch snippet cucumber-goto-step lua-mode helm-ag feature-mode gherkin-mode evil-repeat smooth-scrolling rubocop dired-sort fuzzy dired+ move-text gotest yaml-mode discover yafolding web-mode minitest ruby-end evil-numbers ruby-test-mode hlinum auto-complete go-mode coffee-mode powerline-evil smart-mode-line-powerline-theme haml-mode rspec-mode projectile-rails ## alchemist evil-cleverparens indent-guide aggressive-indent paredit magit evil-search-highlight-persist evil-nerd-commenter evil-surround evil which-key use-package undo-tree helm-projectile general exec-path-from-shell better-defaults base16-theme ag)))
  '(require-final-newline (quote visit-save))
  '(rspec-command-options "--format p")
- '(ruby-end-insert-newline nil)
  '(ruby-insert-encoding-magic-comment nil)
  '(ruby-test-rspec-options (quote ("--format p")))
  '(safe-local-variable-values (quote ((encoding . utf-8))))
@@ -149,9 +147,9 @@
      (:propertize " " face powerline-active1))))
  '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes)))
  '(temporary-file-directory "/var/tmp/")
+ '(web-mode-css-indent-offset 2)
  '(web-mode-enable-css-colorization t)
- '(web-mode-enable-current-column-highlight t)
- '(web-mode-markup-indent-offset 2))
+ '(web-mode-enable-current-column-highlight t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

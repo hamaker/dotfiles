@@ -115,15 +115,28 @@ w.r.t. indentation."
 (defun create-tags (dir-name)
   "Create tags file."
   (interactive "DDirectory: ")
-  (shell-command
-  (format "%s -f TAGS -e -R %s" path-to-ctags (directory-file-name dir-name)))
+  (let* ((patterns '(choises.js *.sql *.css *.htnl *.min.js *.svg *.json *.js))
+         (exclude-strings (mapcar
+                           (lambda (s) (format "--exclude=%s "  (shell-quote-argument (symbol-name s))))
+                           patterns))
+         (exclude-string (apply 'concat exclude-strings))
+         )
+
+    (shell-command
+     (format "%s -f %s/TAGS %s -e -R %s"
+             path-to-ctags
+             (directory-file-name dir-name)
+             exclude-string
+             (directory-file-name dir-name)))
+    (visit-tags-table (format "%s/TAGS" (directory-file-name dir-name)))
+    )
   )
 
 (defun rspec-assign-to-let ()
   "changes an assignment to a let statement"
   (interactive)
   (move-beginning-of-line nil)
-  (re-search-forward "\\(\\w+\\) = \\(.*\\)$" nil t)
+  (re-search-forward "\\([^[:space:]]+\\) = \\(.*\\)$" nil t)
   (replace-match "let(:\\1) { \\2 }" ))
 
 (defun ruby-symbol-to-string ()
@@ -137,5 +150,26 @@ w.r.t. indentation."
   "reloads the current page in all Firefox windows"
   (interactive)
   (shell-command  "xdotool search --name \"Mozilla Firefox\" | xargs -n1 xvkbd -text \"\\[F5]\" -window" nil nil))
+
+(defun my-increment-number-decimal (&optional arg)
+  "Increment the number forward from point by 'arg'."
+  (interactive "p*")
+  (save-excursion
+    (save-match-data
+      (let (inc-by field-width answer)
+        (setq inc-by (if arg arg 1))
+        (skip-chars-backward "0123456789")
+        (when (re-search-forward "[0-9]+" nil t)
+          (setq field-width (- (match-end 0) (match-beginning 0)))
+          (setq answer (+ (string-to-number (match-string 0) 10) inc-by))
+          (when (< answer 0)
+            (setq answer (+ (expt 10 field-width) answer)))
+          (replace-match (format (concat "%0" (int-to-string field-width) "d")
+                                 answer)))))))
+(defun incrementer-mode ()
+  "add increment number shortcut to local keymap"
+  (interactive)
+  (keys :keymap (current-local-map)
+        "C-M-a" 'my-increment-number-decimal))
 
 (provide 'init-functions)

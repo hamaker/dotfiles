@@ -51,11 +51,11 @@
             "m" 'maximize-window-vertically
             "SPC" 'toggle-maximize-buffer)))
 
-(use-package enh-ruby-mode
+(use-package ruby-mode
   :config
   (keys-l "S" 'ruby-symbol-to-string)
   (add-to-list 'auto-mode-alist
-               '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
+               '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)))
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -84,6 +84,11 @@
   :config
   (smooth-scrolling-mode)
   (setq smooth-scroll-margin 4))
+
+(use-package csharp-mode
+  :config
+  (setq tab-width 4)
+  (setq c-basic-offset 4))
 
 (use-package helm
   :init
@@ -125,8 +130,8 @@
 (use-package ruby-test-mode
   :config
   (setq ruby-insert-encoding-magic-comment nil)
-  (keys-l "e" 'save-and-ruby-test-run-at-point)
-  (keys-l "r" 'save-and-ruby-test-run))
+  (keys-l "e" 'save-and-ruby-test-run-at-point
+          "r" 'save-and-ruby-test-run))
 
 (use-package yafolding
   :config

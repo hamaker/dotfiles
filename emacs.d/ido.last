@@ -2,31 +2,82 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/home/niels/.config/systemd/" . "user/")
+ ("/home/niels/.config/" . "systemd/")
+ ("/home/niels/code/1pc/MentoriProgram/azlan/Data/EmailTemplates/" . "fr-fr/")
+ ("/home/niels/code/1pc/MentoriProgram/azlan/Data/" . "EmailTemplates/")
+ ("/home/niels/code/1pc/MentoriProgram/azlan/" . "Data/")
  ("/home/niels/" . "code/")
- ("/home/niels/code/1pc/" . "procure_wizard/")
+ ("/home/niels/code/1pc/" . "MentoriProgram/")
  ("/home/niels/code/" . "1pc/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+ "/home/niels/.config/systemd/user/"
+ "/home/niels/code/1pc/dsa/horizon/app/controllers/partners/"
+ "/home/niels/code/1pc/dsa/horizon/test/fixtures/"
+ "/home/niels/code/1pc/dsa/horizon/app/assets/stylesheets/pages/admin/"
+ "/home/niels/code/1pc/dsa/horizon/test/controllers/admin/"
+ "/home/niels/dotfiles/emacs.d/init/"
+ "/home/niels/code/1pc/MentoriProgram/azlan/Data/EmailTemplates/fr-fr/"
+ "/home/niels/code/1pc/MentoriProgram/"
  "/home/niels/code/1pc/procure_wizard/"
 )
 
 ;; ----- ido-work-file-list -----
 (
+ "emacs.service"
+ "base_controller.rb"
+ "pdm_users.yml"
+ "base.scss"
+ "admin_users.yml"
+ "pdm_users_controller_test.rb"
+ "init-functions.el"
+ "AccountNotAccessed.html"
+ "README.md"
  "report.org"
- "PW.bak"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/niels/code/1pc/procure_wizard/" (22988 4326 454988 759000) ".~lock.report-Amazon Aurora (MySQL compatible)-2017-09-25-04-41.csv#" "report-Amazon RDS for PostgreSQL-2017-09-25-04-41_Summary.csv" "report-Amazon RDS for PostgreSQL-2017-09-25-04-41.csv" "report-Amazon RDS for MySQL-2017-09-25-04-41_Summary.csv" "report-Amazon RDS for MySQL-2017-09-25-04-41.csv" "report-Amazon Aurora (MySQL compatible)-2017-09-25-04-41_Summary.csv" "report-Amazon Aurora (MySQL compatible)-2017-09-25-04-41.csv" "report.pdf" "report-db-conversion.zip" "PW.bak" "vagrant/" "plan.notes" "mssql/" "citus.notes" "procure_wizard.notes" "ProcureWizard Database Development Strategy_Scoping Report - Notes Niels.docx" "ProcureWizard Database Development Strategy_Scoping Report - With amendments Niels.docx" "../" "./")
+ ("/home/niels/.config/systemd/user/" (23069 20657 480682 148000) "sockets.target.wants/" "set_keyboard_rate.timer" "set_keyboard_rate.service" "ergodox_monitor.service" "default.target.wants/" "ssh-agent.service" "emacs.service" "../" "./")
+
+ ("/home/niels/.config/systemd/" (22773 7859 357625 614000) "user/" "../" "./")
+
+ ("/home/niels/.config/" (23096 54941 244222 937000) "pavucontrol.ini" "okularrc" "mimeapps.list" "configstore/" "supertuxkart/" "QtProject.conf" "user-dirs.locale" "user-dirs.dirs" "awesome/" "d-feet/" "wireshark/" "gedit/" "lpass/" "gnome-session/" "Code/" "VirtualBox/" "libreoffice/" "okularpartrc" "okular_epub_generator_settings" "kactivitymanagerdrc" "totem/" "keepassxc/" "htop/" "lecli/" "evince/" "yelp/" "epiphany/" "nautilus/" "autostart/" "systemd/" "Trolltech.conf" "spotify/" "cef_user_data/" "ibus/" "goa-1.0/" "evolution/" "gtk-3.0/" "gthumb/" "menus/" "google-chrome/" "Slack/" "gtk-2.0/" "pulse/" "astromenace/" "volumeicon/" "enchant/" "dconf/" "eog/" "gconf/" "calibre/" "skypeforlinux/" "urxvtconfig/" "chromium/" "terminator/" "parcellite/" "../" "./")
+
+ ("/home/niels/" (23096 60781 768737 381000) ".histfile" ".lesshst" ".viminfo" ".dropbox-dist/" ".yarnrc" "test" ".python_history" "paul@109.74.202.95" "0x146E44C8C1B45B35.gpg-revocation-certificate" "gnupg-backup.tar" ".zshprompt" ".zshkeys" ".zshenv" ".zshrc" ".aliases" "billshock_dump_20171103-1149.sql" "tmp_photos/" "Videos/" "Pictures/" "Music/" "Documents/" "Public/" "Templates/" "2ctest.js" ".zkbd/" "timestamp.log" "test.sh" "Marieke/" ".platformio/" ".zcompdump" "billshock_dump_201710200928.sql" "output.rb" ".terraform.d/" "lastpass-2017.pdf" ".aws/" ".aws.encfs/" ".aws.old/" "encfs/" ".encfs/" ".Xauthority" ".awesome-errors" ".awesome-errors.old" ".lpass/" ".gvfs/" ".ansible/" ".mysql_history" "notes.md" ".xinitrc" ".ipython/" "FP2/" ".gphoto/" "long-lines.txt" ".vagrant.d/" ".ICEauthority" ".java/" ".DataGrip2017.2/" ".tuxpaint/" ".odbc.ini" ".nuget/" "nohup.out" ".templateengine/" ".dotnet/" ".vscode/" ".chpwd-recent-dirs" "VirtualBox VMs/" ".toprc" ".ghc/" ".psql_history" "bin/" ".viminfw.tmp" ".viminfx.tmp" "go/" ".node-gyp/" ".npmrc" ".npm/" "src/" "ebooks/" ".wpa_cli_history" "db_dump_20170629_1254.sql" ".warzone2100-3.2/" ".Xmodmap" ".Xmodmap2" ".ruby_inline/" "synclientsettings" "photos/" ".qws/" "movies/" ".xprofile" ".Xresources" "random/" ".Trash/" ".bash_history" ".gitignore_global" ".warzone2100-3.1/" ".steampid" ".steampath" ".steam/" "Niels/" ".node_repl_history" ".gcalcli_cache" ".gstreamer-0.10/" ".bogofilter/" ".viminfy.tmp" ".viminfz.tmp" ".thunderbird/" ".w3m/" ".thumbnails/" ".gimp-2.8/" ".gnome/" ".macromedia/" ".adobe/" ".gcalclirc" ".gcalcli_oauth" "gcalcli-3.3.2.patch" ".irbrc" ".irb-save-history" ".gemrc" ".rbenv/" ".xsession-errors" ".xsession-errors.old" ".dmrc" ".viminfo.tmp" ".gtkrc-2.0" ".fontypython/" "test.wav" ".asoundrc" ".gnupg/" ".zcompcache/" ".dbus/" "Dropbox/" "library/" ".gitconfig" ".bundle/" "code/" ".gem/" ".dropbox/" "LICENSE_OFL.txt" ".emacs.d/" ".claws-mail/" ".pki/" ".vim/" ".vimrc" "colors.pl" "dotfiles/" ".conkyrc" ".config/" ".local/" "Downloads/" ".lastpass/" "Desktop/" ".mozilla/" ".cache/" ".bash_logout" ".bash_profile" ".bashrc" ".ssh/" "../" "./")
+
+ ("/home/niels/dotfiles/" (23053 43677 246524 384000) "gitconfig" "zshprompt" "zshkeys" "zshenv" "zshrc" "aliases" "awesome/" "Xmodmap" "xinitrc" "xprofile" "Xresources" "vimrc" "vim/" "oh-my-zsh/" "irbrc" "hgrc" "emacs.d/" "bash_profile" "bash_colours.bash" ".gitignore" ".git/" "../" "./")
+
+ ("/home/niels/dotfiles/emacs.d/" (23096 61014 64880 901000) "init.el" "ido.last" "#init.el#" "2" "image-dired/" "abbrev_defs" "eshell/" "projectile.cache" "games/" "history" "rake.cache" "auto-save-list/" "places" "ac-comphist.dat" "projectile-bookmarks.eld" "backups/" "elpa/" "init/" "../" "./")
+
+ ("/home/niels/code/1pc/dsa/horizon/test/controllers/admin/" (23096 62899 995297 790000) "pdm_users_controller_test.rb" "home_controller_test.rb" "../" "./")
+
+ ("/home/niels/code/1pc/dsa/horizon/app/assets/stylesheets/pages/admin/" (23096 62899 989297 763000) "base.scss" "../" "./")
+
+ ("/home/niels/code/1pc/dsa/horizon/test/fixtures/" (23096 62899 996297 794000) "users.yml" "logins.yml" "sub_capabilities.yml" "partners.yml" "capabilities.yml" "assessments.yml" "files/" "countries.yml" ".keep" "../" "./")
+
+ ("/home/niels/code/1pc/dsa/horizon/app/controllers/partners/" (23095 60881 706479 885000) "sub_capability_controller.rb" "capability_controller.rb" "assessments_controller.rb" "dashboards_controller.rb" "../" "./")
+
+ ("/home/niels/code/1pc/procure_wizard/" (23007 33916 27390 251000) "Report Procure Wizard - MR Comments (final with additions Niels).docx" "Report Procure Wizard - MR Comments (final).docx" "plan.notes" "report.org" "Report Procure Wizard - Niels.docx" "archive/" "../" "./")
+
+ ("/home/niels/code/1pc/MentoriProgram/" (23078 49412 975035 733000) "TAGS" "test.tmp" "packages/" ".vs/" "partner meet questions.sql" "partner lookup test.sql" "newly registered users.sql" "dsa-azlan-live(test).PublishSettings" "dsa-azlan-live(staging).PublishSettings" "azlan/" "azlan.sln" "README.md" "AzureCloudService/" "Azlan.Emails.WebJob/" ".gitignore" ".git/" "../" "./")
+
+ ("/home/niels/code/1pc/MentoriProgram/azlan/Data/EmailTemplates/fr-fr/" (23073 24708 614347 339000) "SeniorManagerCredentials.txt" "SeniorManagerCredentials.html" "SecurityCode.txt" "SecurityCode.html" "RequestHelpToImprove.txt" "RequestHelpToImprove.html" "PartnerCredentials.txt" "PartnerCredentials.html" "NewPassword.txt" "NewPassword.html" "IncompleteAssessment.txt" "IncompleteAssessment.html" "EmailTemplateInfo.txt" "CountryManagerCredentials.txt" "CountryManagerCredentials.html" "AskExpert.txt" "AskExpert.html" "AdminCredentials.txt" "AdminCredentials.html" "AccountNotAccessed.txt" "AccountNotAccessed.html" "../" "./")
+
+ ("/home/niels/dotfiles/emacs.d/init/" (23090 20745 514693 379000) "init-functions.el" "init-evil.el" "init-editor-packages.el" "init-editor-custom.el" "symbol-focus.el" "init-use-package.el" "init-org.el" "init-magit.el" "init-lisp.el" "init-go.el" "init-clojure.el" "../" "./")
+
+ ("/home/niels/code/1pc/MentoriProgram/azlan/Data/EmailTemplates/" (23068 8789 212975 341000) "fr-fr/" "es-es/" "it-it/" "en-gb/" "de-de/" "../" "./")
+
+ ("/home/niels/code/1pc/MentoriProgram/azlan/Data/" (23060 23992 739511 226000) "state-of-professional-services-2017.pdf" "comptia-msp-best-in-class-benchmark-5-09.pdf" "bulk-insert-template.csv" "EmailTemplates/" "App/" "../" "./")
+
+ ("/home/niels/code/1pc/MentoriProgram/azlan/" (23060 40744 204860 14000) "App_Data/" "obj/" "bin/" "pre-build.targets" "packages.config" "js/" "img/" "fonts/" "css/" "azlan.csproj" "Web.staging.config" "Web.config" "Web.Test.config" "Web.Release.config" "Web.Debug.config" "Views/" "Startup/" "Startup.cs" "Properties/" "Models/" "Migrations/" "Logic/" "GlobalExtensions.cs" "Global.asax.cs" "Global.asax" "Data/" "Controllers/" "AsyncHelpers.cs" "App_Start/" "App_Readme/" "App_Code/" "../" "./")
+
+ ("/home/niels/code/1pc/" (23060 23765 526311 387000) "MentoriProgram/" "archive/" "ansible-service-scripts/" "dotnet_test/" "benefits-of-jira.txt" "velocitylight-spree/" "procure_wizard/" "citus.notes" "rule10/" "telematics-whitelabel/" "_winfred/" "20170508101051_drop_columns_from_borrower_company_member.rb" "20170508094411_drop_columns_from_company_member.rb" "winfred/" "../" "./")
 
  ("/home/niels/code/" (22982 51394 239254 256000) "long-lines.txt" "lines.txt" "system/" "random/" "1pc/" "personal/" "../" "./")
-
- ("/home/niels/" (22988 45644 899161 47000) ".viminfo" ".histfile" ".lesshst" "FP2/" ".mysql_history" ".gphoto/" "long-lines.txt" ".vagrant.d/" ".Xauthority" ".ICEauthority" ".java/" ".DataGrip2017.2/" ".tuxpaint/" ".odbc.ini" ".nuget/" ".zcompdump" "nohup.out" ".templateengine/" ".dotnet/" "dotnet-sdk-2.0.0-linux-x64.tar.gz" ".vscode/" ".python_history" ".chpwd-recent-dirs" ".dropbox-dist/" "VirtualBox VMs/" ".toprc" ".ghc/" ".psql_history" "bin/" ".aws/" "Screenshot from 2017-08-11 15-47-51.png" "Screenshot from 2017-08-11 15-44-58.png" "Screenshot.png" "Screenshot from 2017-08-11 12-13-29.png" ".viminfw.tmp" ".viminfx.tmp" "Screenshot from 2017-08-08 16-15-06.png" "go/" ".node-gyp/" ".npmrc" ".npm/" ".easy-ebook-viewer.conf" "src/" "ebooks/" ".wpa_cli_history" "db_dump_20170629_1254.sql" "db_dump_20170421_0935.sql" ".warzone2100-3.2/" "db_dump_20170621_1144.sql" ".Xmodmap" ".Xmodmap2" ".ruby_inline/" "synclientsettings" "boeking_laura.pdf" "photos/" ".qws/" "movies/" ".xinitrc" ".xprofile" ".Xresources" "random/" ".Trash/" ".bash_history" ".gitignore_global" ".warzone2100-3.1/" ".steampid" ".steampath" ".steam/" "Niels/" ".node_repl_history" ".gcalcli_cache" ".gstreamer-0.10/" ".bogofilter/" ".viminfy.tmp" ".viminfz.tmp" ".thunderbird/" ".w3m/" ".thumbnails/" ".gimp-2.8/" ".gnome/" ".macromedia/" ".adobe/" ".gcalclirc" ".gcalcli_oauth" "gcalcli-3.3.2.patch" ".irbrc" ".zshprompt" ".irb-save-history" ".gemrc" ".rbenv/" ".xsession-errors" ".xsession-errors.old" ".dmrc" ".viminfo.tmp" ".gtkrc-2.0" ".fontypython/" "test.wav" ".asoundrc" ".zshenv" ".gnupg/" ".zcompcache/" ".dbus/" "Dropbox/" "library/" ".gitconfig" ".bundle/" "code/" ".gem/" ".dropbox/" "LICENSE_OFL.txt" ".emacs.d/" ".claws-mail/" ".pki/" ".vim/" ".vimrc" "colors.pl" "dotfiles/" ".conkyrc" ".config/" ".local/" "Downloads/" ".lastpass/" "Desktop/" ".mozilla/" ".cache/" ".awesome-errors" ".zshrc" ".bash_logout" ".bash_profile" ".bashrc" ".ssh/" "../" "./")
-
- ("/home/niels/code/1pc/" (22979 35816 662453 441000) "dotnet_test/" "benefits-of-jira.txt" "velocitylight-spree/" "procure_wizard/" "citus.notes" "rule10/" "telematics-whitelabel/" "_winfred/" "20170508101051_drop_columns_from_borrower_company_member.rb" "20170508094411_drop_columns_from_company_member.rb" "winfred/" "../" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----

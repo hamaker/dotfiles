@@ -8,8 +8,8 @@
   (evil-mode t)
   (evil-ex-define-cmd "W" "w")
   (evil-ex-define-cmd "A" '(lambda ()
-                              (interactive)
-                              (projectile-rails-find-current-spec)))
+                             (interactive)
+                             (projectile-rails-find-current-spec)))
   (evil-ex-define-cmd "AV" '(lambda ()
                               (interactive)
                               (evil-window-vsplit)
@@ -42,11 +42,11 @@
         "] SPC" 'insert-newline-below)
 
   (keys :states 'normal
-        "-" '(dired-current)
-        "#" '(evil-search-word-forward))
+        "-" 'dired-current
+        "#" 'evil-search-word-forward)
 
   (keys-l :states 'visual
-        "Y" 'pbcopy)
+          "Y" 'pbcopy)
 
 
   (lexical-let ((default-color (cons (face-background 'mode-line)

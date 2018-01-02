@@ -79,7 +79,7 @@
 ;; (setq ruby-end-insert-newline nil)
 
 ;; font settings
-(setq-default line-spacing 4)
+(setq-default line-spacing 0)
 
 ;; Automatically remove trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -92,6 +92,7 @@
 (add-hook 'rubocop-mode-hook (lambda () (linum-mode 0)))
 (add-hook 'rubocop-mode-hook (lambda () (visual-line-mode 1)))
 (add-to-list 'default-frame-alist '(background-color . "black"))
+(add-hook 'buffer-list-update-hook (lambda () (if (window-system) (hl-line-mode 1) (hl-line-mode 0))))
 
 ;; Less intriguing colors for isearch
 (custom-set-faces
@@ -116,16 +117,15 @@
 (bind-keys :map dired-mode-map
            ("-" . dired-up-directory))
 
-(global-hl-line-mode)
 (xterm-mouse-mode)
 (setq tab-width 4)
 
 (set-face-foreground 'mode-line "#ffffff")
 (set-face-background 'mode-line "#2c2c2c")
 (set-face-background 'mode-line-inactive "#1d1d1d")
-(setq path-to-ctags "/usr/local/bin/ctags")
+(setq path-to-ctags "/usr/bin/ctags")
 
 (keys-l "1" 'window-configuration-to-register)
-(keys-l "2" 'window-configuration-from-register)
+(keys-l "2" 'register-to-point)
 
 (provide 'init-editor-custom)
