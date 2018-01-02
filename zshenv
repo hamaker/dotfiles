@@ -1,5 +1,5 @@
 export PATH=~/.rbenv/bin:~/.local/bin:~/.local/npm-packages/bin:$PATH
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh-agent
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
 export LC_COLLATE='C'
 export GOPATH=~/go
 export GOBIN="$GOPATH/bin"

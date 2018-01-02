@@ -16,6 +16,9 @@ autoload -Uz compinit promptinit
 compinit
 # promptinit; prompt gentoo
 zstyle ':completion::complete:*' use-cache 1
+# zstyle -s ':completion:*:hosts' hosts _ssh_config
+# [[ -r ~/.ssh/config ]] && _ssh_config+=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p'))
+# zstyle ':completion:*:hosts' hosts $_ssh_config
 
 source ~/.aliases
 source ~/.zshprompt

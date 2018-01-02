@@ -26,6 +26,7 @@
 [user]
   name = Niels Hamaker
   email = nielshamaker@gmail.com
+	signingkey = F021E97348614892
 [color]
   ui = true
   branch = true
@@ -59,3 +60,5 @@
   diff = diff-highlight | less
 [interactive]
   diffFilter = diff-highlight
+[commit]
+	gpgsign = true

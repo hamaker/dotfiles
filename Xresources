@@ -24,6 +24,7 @@ URxvt.scrollTtyOutput:      false
 URxvt.scrollWithBuffer:     true
 URxvt.scrollTtyKeypress:    true
 URxvt.saveLines: 50000
+URxvt*fading: 40
 
 URxvt.iso14755: false
 URxvt.iso14755_52: false
