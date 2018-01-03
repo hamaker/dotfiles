@@ -95,22 +95,6 @@ end
 -- }}}
 
 -- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -142,8 +126,8 @@ cpuwidget = wibox.widget({
 memwidget = wibox.widget.graph()
 memwidget:set_width(50)
 memwidget:set_background_color("#494B4F")
-memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 50, 0 },
-stops = { { 0, "#FF5656" }, { 0.5, "#88A175" }, { 1, "#AECF96" }}})
+memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 50 },
+stops = { { 0, "#FF0000" }, { 0.3, "#FF5656" }, { 0.6, "#88A175" }, { 1, "#AECF96" }}})
 vicious.register(memwidget, vicious.widgets.mem, "$1", 5)
 memwidget = wibox.widget({
   wibox.container.mirror(memwidget, { horizontal = true } ),
@@ -253,7 +237,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            -- mylauncher,
             s.mytaglist,
             cpuwidget,
             memwidget,
@@ -275,7 +259,6 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -287,6 +270,8 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
 
+    awful.key({ modkey, "Control" }, "m",     client_menu_toggle_fn(),
+              {description="Toggle client menu", group="awesome"}),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey, "Control" }, "j",   awful.tag.viewprev,
@@ -312,8 +297,6 @@ globalkeys = awful.util.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -344,12 +327,8 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "b", function () awful.spawn("firefox-developer-bin") end,
-              {description = "open a brosers (FF Dev)", group = "launcher"}),
     awful.key({ modkey,           }, "e", function () awful.spawn("emacsclient -c") end,
               {description = "open an emacsclient", group = "launcher"}),
-    awful.key({ modkey, "Shift"   }, "m", function () awful.spawn("evolution") end,
-              {description = "open an mail client", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
