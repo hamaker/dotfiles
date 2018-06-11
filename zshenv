@@ -1,4 +1,4 @@
-export PATH=~/.rbenv/bin:~/.local/bin:~/.local/npm-packages/bin:$PATH
+export PATH=~/.rbenv/bin:~/.local/bin:~/.local/npm-packages/bin:~/.config/composer/vendor/bin:$PATH
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
 export LC_COLLATE='C'
 export GOPATH=~/go

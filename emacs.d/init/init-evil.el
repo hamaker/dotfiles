@@ -15,11 +15,12 @@
                               (evil-window-vsplit)
                               (windmove-right)
                               (projectile-rails-find-current-spec)))
-  (evil-define-key 'normal magit-blame-mode-map (kbd "q") 'magit-blame-quit)
-  (evil-define-key 'normal magit-blame-mode-map (kbd "RET") 'magit-show-commit)
   (define-key evil-insert-state-map (kbd "M-RET") 'evil-open-below)
-  (define-key evil-normal-state-map (kbd "S-M-RET") 'evil-open-above)
+  (define-key evil-insert-state-map (read-kbd-macro "<S-return>") 'evil-open-above)
+  (define-key evil-normal-state-map (kbd "M-RET") 'evil-open-below)
+  (define-key evil-normal-state-map (read-kbd-macro "<S-return>") 'evil-open-above)
   (define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
+  (define-key evil-motion-state-map "\C-y" nil) ;; unbind this keybinding so I can use emacs yank
   (add-hook 'magit-blame-mode-hook '(lambda () (evil-normalize-keymaps)))
 
   (keys :states nil
@@ -33,11 +34,14 @@
 
 
   (keys "C-n" 'next-error
+        "C-o" 'evil-jump-backward
+        "C-S-o" 'evil-jump-forward
         "C-p" 'previous-error
         "C-h" 'evil-window-left
         "C-j" 'evil-window-down
         "C-k" 'evil-window-up
         "C-l" 'evil-window-right
+        "C-," 'evil-repeat-find-char-reverse
         "[ SPC" 'insert-newline-above
         "] SPC" 'insert-newline-below)
 
@@ -46,7 +50,7 @@
         "#" 'evil-search-word-forward)
 
   (keys-l :states 'visual
-          "Y" 'pbcopy)
+    "Y" 'pbcopy)
 
 
   (lexical-let ((default-color (cons (face-background 'mode-line)
@@ -79,5 +83,13 @@
   (keys :keymaps 'prog-mode-map
         :states '(normal)
         "RET" 'evil-search-highlight-persist-remove-all))
+
+(use-package evil-string-inflection
+  :ensure t)
+
+(use-package evil-numbers
+  :config
+  (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 (provide 'init-evil)

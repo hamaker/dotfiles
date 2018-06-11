@@ -1,11 +1,6 @@
 (use-package better-defaults
   :pin melpa-stable)
 
-;; (use-package auto-complete
-;;   :init
-;;   (ac-config-default)
-;;   (setq ac-ignore-case nil))
-
 (use-package company
   :diminish company-mode
   :init
@@ -27,35 +22,49 @@
 
 (use-package general
   :config
-  (progn
-    (setq general-default-states '(normal motion))
-    (general-create-definer keys-l :prefix ",")
-    (defalias 'keys 'general-define-key)
+  (setq general-default-states '(normal motion))
+  (general-create-definer keys-l
+    :keymaps 'global
+    :prefix ",")
+  (defalias 'keys 'general-define-key)
 
-    (keys-l :states 'normal
-            :keymaps 'emacs-lisp-mode-map
-            "e" 'eval-last-sexp
-            "d" 'helm-apropos)
+  (keys-l :states 'normal
+    :keymaps 'emacs-lisp-mode-map
+    "e" 'eval-last-sexp
+    "d" 'helm-apropos)
 
-    (keys-l "," 'my-switch-to-other-buffer
-            "k" 'kill-other-buffers
-            "q" 'kill-this-buffer
-            "w" 'delete-window
-            "x" 'next-code-buffer
-            "S" 'sf/focus-at-point
-            "z" 'previous-code-buffer
-            "v" 'open-emacs-config
-            "o" 'other-frame
-            "O" 'make-frame-command
-            "y" 'pbcopy
-            "m" 'maximize-window-vertically
-            "SPC" 'toggle-maximize-buffer)))
+  (keys-l :states 'normal
+    "," 'my-switch-to-other-buffer
+    "k" 'kill-other-buffers
+    "q" 'my-kill-this-buffer
+    "w" 'delete-window
+    "x" 'next-code-buffer
+    "S" 'sf/focus-at-point
+    "z" 'previous-code-buffer
+    "V" 'open-emacs-config
+    "o" 'other-frame
+    "O" 'make-frame-command
+    "y" 'pbcopy
+    "m" 'maximize-window-vertically
+    "=" 'format-whole-buffer
+    "SPC" 'toggle-maximize-buffer
+    "hm" 'describe-mode
+    "hv" 'describe-variable
+    "hf" 'describe-function
+    "hk" 'describe-key
+    "v" 'customize-variable)
+  )
 
 (use-package ruby-mode
   :config
-  (keys-l "S" 'ruby-symbol-to-string)
+  (keys-l :states 'normal
+    "S" 'ruby-symbol-to-string)
   (add-to-list 'auto-mode-alist
                '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)))
+
+(use-package jsx-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode)))
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -64,13 +73,17 @@
 
 (use-package dired+
   :config
+  (keys "C-h" 'evil-window-left
+        "C-j" 'evil-window-down
+        "C-k" 'evil-window-up
+        "C-l" 'evil-window-right)
   (diredp-toggle-find-file-reuse-dir 1))
 
 (use-package ag
   :defer t
   :init
   (setq ag-reuse-buffers t)
-  (keys-l "s" 'ag))
+  (keys-l :states 'normal "s" 'ag))
 
 (use-package which-key
   :diminish which-key-mode
@@ -99,7 +112,8 @@
         helm-apropos-fuzzy-match t
         helm-recentf-fuzzy-match t)
   :config
-  (keys-l "b" 'helm-buffers-list
+  (keys-l :states 'normal
+          "b" 'helm-buffers-list
           "y" 'helm-show-kill-ring)
   (keys :states nil
         "M-x" 'helm-M-x))
@@ -111,31 +125,35 @@
         projectile-completion-system 'helm
         projectile-switch-project-action 'helm-projectile-find-file)
   :config
-  (keys-l "p" 'projectile-command-map)
+  (keys-l :states 'normal "p" 'projectile-command-map)
   (projectile-global-mode t))
 
 (use-package helm-projectile
   :config
-  (keys-l "f" 'helm-projectile
-          "F" 'helm-find-files))
+  (keys-l :states 'normal
+    "f" 'helm-projectile
+    "F" 'helm-find-files))
 
 (use-package projectile-rails
   :init
   (add-hook 'projectile-mode-hook 'projectile-rails-on)
   :config
-  (keys-l ".m" 'projectile-rails-find-model
-          ".c" 'projectile-rails-find-controller)
+  (keys-l :states 'normal
+    ".m" 'projectile-rails-find-model
+    ".c" 'projectile-rails-find-controller)
   )
 
 (use-package ruby-test-mode
   :config
   (setq ruby-insert-encoding-magic-comment nil)
-  (keys-l "e" 'save-and-ruby-test-run-at-point
+  (keys-l :states 'normal
+          "e" 'save-and-ruby-test-run-at-point
           "r" 'save-and-ruby-test-run))
 
 (use-package yafolding
   :config
-  (keys-l "t" 'yafolding-toggle-element))
+  (keys-l :states 'normal
+          "t" 'yafolding-toggle-element))
 
 (use-package web-mode
   :config
@@ -145,7 +163,12 @@
 
 (use-package rubocop
   :config
-  (keys-l "R" 'rubocop-check-project))
+  (keys-l :states 'normal
+    "R" 'rubocop-check-project))
 
+(use-package csharp-mode
+  :config
+  (add-hook 'csharp-mode-hook (lambda () (setq c-basic-offset 4)))
+  )
 
 (provide 'init-editor-packages)

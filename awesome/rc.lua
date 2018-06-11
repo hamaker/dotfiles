@@ -271,6 +271,8 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "g", function () gather_clients() end,
               {description = "gather clients", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "g", function () ungather_clients() end,
+              {description = "gather clients", group = "client"}),
    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
@@ -289,12 +291,16 @@ globalkeys = awful.util.table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    awful.key(
+       { modkey,           }, "Escape",
+       awful.tag.history.restore,
+       {description = "go back", group = "tag"}
+    ),
 
-    awful.key({ modkey,           }, "j",
-        function () awful.client.focus.byidx( -1) end,
-        {description = "focus next by index", group = "client"}
+    awful.key(
+       { modkey,           }, "j",
+       function () awful.client.focus.byidx( -1) end,
+       {description = "focus next by index", group = "client"}
     ),
     awful.key({ modkey,           }, "k",
         function () awful.client.focus.byidx(1) end,
@@ -302,36 +308,39 @@ globalkeys = awful.util.table.join(
     ),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx( -1)    end,
-              {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( 1)    end,
-              {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Mod1"    }, "o", function () awful.screen.focus_relative(1) end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Mod1", "Shift"   }, "o", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Mod1"    }, "j",
-       function ()
-          awful.screen.focus_relative(-1)
-          naughty.notify({
-                preset = naughty.config.presets.low,
-                title = 'Here',
-                timeout = 1,
-                position = 'bottom_middle'
-          })
-       end,
-       {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey,           }, "Up", function () awful.screen.focus_relative(1) end,
-              {description = "focus the next screen", group = "screen"}),
+    awful.key(
+       { modkey, "Shift"   }, "j",
+       function () awful.client.swap.byidx( -1)    end,
+       {description = "swap with next client by index", group = "client"}
+    ),
+    awful.key(
+       { modkey, "Shift"   }, "k",
+       function () awful.client.swap.byidx( 1)    end,
+       {description = "swap with previous client by index", group = "client"}
+    ),
+    awful.key(
+       { modkey, "Mod1"    }, "o",
+       function () awful.screen.focus_relative(1) end,
+       {description = "focus the next screen", group = "screen"}
+    ),
+    awful.key(
+       { modkey, "Mod1", "Shift"   }, "o",
+       function () awful.screen.focus_relative(-1) end,
+       {description = "focus the next screen", group = "screen"}
+    ),
+    awful.key(
+       { modkey, "Mod1"    }, "j",
+       function () cycle_screen_with_notify(-1) end,
+       {description = "focus the next screen", group = "screen"}
+    ),
+    awful.key(
+       { modkey,           }, "Up",
+       function () awful.screen.focus_relative(1) end,
+       {description = "focus the next screen", group = "screen"}
+    ),
     awful.key({ modkey, "Mod1"    }, "k",
        function ()
-          awful.screen.focus_relative(1)
-          naughty.notify({
-                preset = naughty.config.presets.low,
-                title = 'Here',
-                timeout = 1,
-                position = 'bottom_middle'
-          })
+          cycle_screen_with_notify(1)
        end,
        {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "Down", function () awful.screen.focus_relative(-1) end,
@@ -354,7 +363,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
 
-    awful.key({ modkey,           }, "e", function () awful.spawn("emacsclient -c") end,
+    awful.key({ modkey,           }, "e", function () awful.spawn("emacsclient -c ~/.todo") end,
               {description = "open an emacsclient", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -412,7 +421,8 @@ globalkeys = awful.util.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
-    awful.key({ modkey, "Control" }, "x", function () awful.util.spawn("xrandr --auto", false) end),
+    awful.key({ modkey, "Control" }, "x", function () awful.util.spawn("xrandr --auto", false) end,
+              {description = "reset X server config", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
@@ -664,23 +674,59 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 function rearange_clients ()
    for _, c in ipairs(client.get()) do
-      -- do something
-      class_map = {}
+      local class_map = {}
       class_map["Firefox Developer Edition"] = { c.screen.tags[2] }
+      class_map["Firefox"] = { c.screen.tags[1] }
       class_map["Emacs"] = { c.screen.tags[3] }
       class_map["Nautilus"] = { c.screen.tags[6] }
       class_map["Slack"] = { c.screen.tags[5] }
+      class_map["Chromium-browser-chromium"] = { c.screen.tags[4] }
       class_map["Evolution"] = { c.screen.tags[9] }
-
-      naughty.notify({ preset = naughty.config.presets.low,
-                       title = c.class })
+      -- do something
       if class_map[c.class] then c:tags(class_map[c.class]) end
    end
 end
 
 function gather_clients ()
-   for _, c in ipairs(client.get()) do
-      -- do something
-      c:move_to_tag(screen[1].tags[1])
+   for i, c in ipairs(client.get()) do
+      c:move_to_tag(screen[1].tags[tonumber(c.first_tag.name)])
    end
+end
+
+function ungather_clients ()
+   naughty.notify({
+         preset = naughty.config.presets.low,
+         title = screen:count(),
+         timeout = 1,
+         position = 'bottom_middle'
+   })
+   if screen:count() ~= 3 then
+      return
+   end
+   local class_map = {}
+   class_map["Firefox Developer Edition"] = screen[3]
+   class_map["Firefox"] = screen[3]
+   class_map["Emacs"] = screen[2]
+   class_map["Nautilus"] = screen[3]
+   class_map["Slack"] = screen[3]
+   class_map["Chromium-browser-chromium"] = screen[3]
+   class_map["Evolution"] = screen[3]
+   class_map["URxvt"] = screen[2]
+   for i, c in ipairs(client.get()) do
+      if class_map[c.class] then c:move_to_screen(class_map[c.class]) end
+   end
+end
+
+function cycle_screen_with_notify (direction)
+   awful.screen.focus_relative(direction)
+   quick_notify()
+end
+
+function quick_notify ()
+   naughty.notify({
+         preset = naughty.config.presets.low,
+         title = 'Here',
+         timeout = 1,
+         position = 'bottom_middle'
+   })
 end

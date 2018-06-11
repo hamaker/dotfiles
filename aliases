@@ -6,5 +6,6 @@ alias du='du -h'
 alias df='df -h'
 alias winfred='cd ~/code/1pc/winfred'
 alias esync='sudo emerge -a n -q --sync'
-alias eupdate='esync && sudo emerge --update --deep --changed-use @world --exclude chromium'
+alias eupdate='sudo emerge --update --deep --changed-use @world --exclude chromium'
 alias edit='emacsclient -nw'
+genpasswd () { tr -dc "A-Za-z0-9_\-^%$[]}{" < /dev/urandom | head -c ${1:=32} | xargs }

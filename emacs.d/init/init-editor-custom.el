@@ -1,5 +1,5 @@
 ;; Show column and linum in mode-line
-(line-number-mode 1)
+;; (line-number-mode 1)
 
 ;; Nowrap
 (setq-default truncate-lines t)
@@ -58,10 +58,10 @@
 (setq ring-bell-function 'ignore)
 
 ;; cmd key for meta
-(setq mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none)
+;; (setq mac-option-key-is-meta nil
+;;       mac-command-key-is-meta t
+;;       mac-command-modifier 'meta
+;;       mac-option-modifier 'none)
 
 ;; Encoding
 (set-terminal-coding-system 'utf-8)
@@ -125,7 +125,8 @@
 (set-face-background 'mode-line-inactive "#1d1d1d")
 (setq path-to-ctags "/usr/bin/ctags")
 
-(keys-l "1" 'window-configuration-to-register)
-(keys-l "2" 'register-to-point)
+(keys-l :states 'normal
+  "1" 'window-configuration-to-register
+  "2" 'register-to-point)
 
 (provide 'init-editor-custom)

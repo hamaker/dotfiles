@@ -1,3 +1,2 @@
 xset r rate 250 50
-eval `ssh-agent -a $XDG_RUNTIME_DIR/keyring/ssh-agent`
 nm-applet &

@@ -15,6 +15,7 @@
 
 (require 'init-use-package)
 (require 'init-functions)
+(require 'help-fns+)
 (require 'init-editor-packages)
 (require 'init-editor-custom)
 (require 'init-evil)
@@ -22,9 +23,10 @@
 (require 'init-org)
 (require 'init-lisp)
 (require 'init-go)
+(require 'init-hydra)
 
 ;; (require 'init-clojure)
-; (require 'symbol-focus)
+                                        ; (require 'symbol-focus)
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'compilation-mode-hook 'visual-line-mode)
 
@@ -66,7 +68,7 @@
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("b3bcf1b12ef2a7606c7697d71b934ca0bdd495d52f901e73ce008c4c9825a3aa" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "84fa3d838aec400453d086913cd373ce84c8b85623451331ec4cf5f68ed878c7" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "ef04dd1e33f7cbd5aa3187981b18652b8d5ac9e680997b45dc5d00443e6a46e3" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "2a5be663818e1e23fd2175cc8dac8a2015dcde6b2e07536712451b14658bbf68" "0b6645497e51d80eda1d337d6cabe31814d6c381e69491931a688836c16137ed" default)))
+    ("5a7830712d709a4fc128a7998b7fa963f37e960fd2e8aa75c76f692b36e6cf3c" "4486ade2acbf630e78658cd6235a5c6801090c2694469a2a2b4b0e12227a64b9" "b3bcf1b12ef2a7606c7697d71b934ca0bdd495d52f901e73ce008c4c9825a3aa" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "84fa3d838aec400453d086913cd373ce84c8b85623451331ec4cf5f68ed878c7" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "ef04dd1e33f7cbd5aa3187981b18652b8d5ac9e680997b45dc5d00443e6a46e3" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "2a5be663818e1e23fd2175cc8dac8a2015dcde6b2e07536712451b14658bbf68" "0b6645497e51d80eda1d337d6cabe31814d6c381e69491931a688836c16137ed" default)))
  '(enh-ruby-add-encoding-comment-on-save nil)
  '(enh-ruby-deep-indent-paren nil)
  '(fci-rule-color "#073642")
@@ -97,23 +99,27 @@
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(ido-enable-flex-matching nil)
  '(ispell-program-name "/usr/bin/aspell")
  '(js-indent-level 2)
  '(magit-diff-use-overlays nil)
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
  '(nil nil t)
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(nxml-child-indent 4)
  '(org-startup-folded nil)
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (typescript-mode solarized-theme php-mode csharp-mode jsx-mode jinja2-mode tabbar terraform-mode company enh-ruby-mode bundler csv-mode git-gutter apib-mode win-switch snippet cucumber-goto-step lua-mode helm-ag feature-mode gherkin-mode evil-repeat smooth-scrolling rubocop dired-sort fuzzy dired+ move-text gotest yaml-mode discover yafolding web-mode minitest ruby-end evil-numbers ruby-test-mode hlinum auto-complete go-mode coffee-mode powerline-evil smart-mode-line-powerline-theme haml-mode rspec-mode projectile-rails ## alchemist evil-cleverparens indent-guide aggressive-indent paredit magit evil-search-highlight-persist evil-nerd-commenter evil-surround evil which-key use-package undo-tree helm-projectile general exec-path-from-shell better-defaults base16-theme ag)))
+    (hydra session oceanic-theme rjsx-mode js2-mode evil-string-inflection wanderlust helm-rg typescript-mode solarized-theme php-mode csharp-mode jsx-mode jinja2-mode tabbar terraform-mode company enh-ruby-mode bundler csv-mode git-gutter apib-mode win-switch snippet cucumber-goto-step lua-mode helm-ag feature-mode gherkin-mode evil-repeat smooth-scrolling rubocop dired-sort fuzzy dired+ move-text gotest yaml-mode discover yafolding web-mode minitest ruby-end evil-numbers ruby-test-mode hlinum auto-complete go-mode coffee-mode powerline-evil smart-mode-line-powerline-theme haml-mode rspec-mode projectile-rails ## alchemist evil-cleverparens indent-guide aggressive-indent paredit magit evil-search-highlight-persist evil-nerd-commenter evil-surround evil which-key use-package undo-tree helm-projectile general exec-path-from-shell better-defaults base16-theme ag)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(projectile-rails-global-mode t)
  '(require-final-newline (quote visit-save))
  '(rspec-command-options "--format p")
+ '(ruby-align-chained-calls t)
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
  '(ruby-deep-indent-paren-style nil)
@@ -121,6 +127,8 @@
  '(ruby-insert-encoding-magic-comment nil)
  '(ruby-test-rspec-options (quote ("--format p")))
  '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(scroll-error-top-bottom t)
+ '(select-enable-primary nil)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(sml/mode-width
    (if
@@ -237,3 +245,4 @@
  '(isearch ((t (:background "#fff" :foreground "#555"))))
  '(isearch-fail ((t (:background "#fff" :foreground "red"))))
  '(lazy-highlight ((t (:background "#fff" :foreground "#333")))))
+(put 'scroll-left 'disabled nil)

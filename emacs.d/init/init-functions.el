@@ -29,6 +29,11 @@
   (interactive)
   (circle-code-buffers 'previous-buffer))
 
+(defun my-kill-this-buffer ()
+  "Kill the current buffer"
+  (interactive)
+  (kill-buffer (current-buffer)))
+
 (defun kill-other-buffers ()
   "Kill all other buffers."
   (interactive)
@@ -166,10 +171,61 @@ w.r.t. indentation."
             (setq answer (+ (expt 10 field-width) answer)))
           (replace-match (format (concat "%0" (int-to-string field-width) "d")
                                  answer)))))))
+
+(defun my-decrement-number-decimal (&optional arg)
+  (interactive "p*")
+  (my-increment-number-decimal (if arg (- arg) -1)))
+
 (defun incrementer-mode ()
   "add increment number shortcut to local keymap"
   (interactive)
   (keys :keymap (current-local-map)
-        "C-M-a" 'my-increment-number-decimal))
+        "C-M-a" 'my-increment-number-decimal
+        "C-M-d" 'my-decrement-number-decimal
+        )
+  )
 
+(defun format-whole-buffer ()
+  "formats the whole buffer"
+  (interactive)
+  (indent-region  (point-min) (point-max)))
+
+(defun increase-font-size (step)
+  "increase the font size by 8"
+  (interactive "p")
+  (set-face-attribute 'default nil :height (+ (face-attribute 'default :height) 5))
+  )
+
+(defun decrease-font-size (step)
+  "increase the font size by step or 5"
+  (interactive "p")
+  (set-face-attribute 'default nil :height (- (face-attribute 'default :height) (if step step 5)))
+  )
+
+(defun kmacro-reset-counter ()
+  "resets the macro counter to 0"
+  (interactive)
+  (kmacro-set-counter 0)
+  )
+
+(defun rotate-windows (arg)
+  "Rotate your windows; use the prefix argument to rotate the other direction"
+  (interactive "P")
+  (if (not (> (count-windows) 1))
+      (message "You can't rotate a single window!")
+    (let* ((rotate-times (prefix-numeric-value arg))
+           (direction (if (or (< rotate-times 0) (equal arg '(4)))
+                          'reverse 'identity)))
+      (dotimes (_ (abs rotate-times))
+        (dotimes (i (- (count-windows) 1))
+          (let* ((w1 (elt (funcall direction (window-list)) i))
+                 (w2 (elt (funcall direction (window-list)) (+ i 1)))
+                 (b1 (window-buffer w1))
+                 (b2 (window-buffer w2))
+                 (s1 (window-start w1))
+                 (s2 (window-start w2))
+                 (p1 (window-point w1))
+                 (p2 (window-point w2)))
+            (set-window-buffer-start-and-point w1 b2 s2 p2)
+            (set-window-buffer-start-and-point w2 b1 s1 p1)))))))
 (provide 'init-functions)
